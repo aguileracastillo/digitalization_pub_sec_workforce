@@ -1,0 +1,46 @@
+---
+title: "Chapter2: Estimation of the effects of digitalization in the public sector workforce"
+author: "Andres Aguilera-Castillo"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Abstract
+
+Problem statement Indication of methodology Main findings Principal
+conclusion
+
+## Introduction
+
+Establishing a territory (claiming centrality; make topic
+generalizations; review items of previous research) Establish a niche
+(counter-claiming; indicate a gap; raise questions; continuing a
+tradition) Occupy the niche (outline purposes; announce present
+research; announce principal findings; indicate structure)
+
+## Literature Review
+
+Work
+
+## Methodology
+
+Process of data collection and techniques in data analysis
+
+## Results
+
+## Discussion
+
+introduction (review findings; discuss outcomes; stake a claim)
+evaluation (analyze; offer explanations; reference the literature; state
+implications) limitations and recommendations
+
+## Conclusion
+
+## References
