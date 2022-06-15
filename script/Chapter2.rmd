@@ -3,6 +3,7 @@ title: "Chapter2: An estimation of the effects of digitalization in the public s
 author: "Andres Aguilera-Castillo"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output: html_document
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -19,29 +20,37 @@ Main findings
 
 Principal conclusion
 
-The scholarly exploration of the linkages between digitalization and the organization of work has been conducted particularly in a private sector context in advanced democracies, however there is a notorious gap in the empirical approximation to this question in a public sector context. The public sector
-
-The public sector is considered a large adopter of Information and Communication Technologies and commands a massive and diverse workforce. remains
-
-In the digital government literature, the impact of digital technologies have been conceptually acknowledgedin the public sector have been conceptually explored in the extant literature, however there is an notorious gap in the empirical approximation to this question. Several factors make this line of inquiry complex, the very nature of the public sector as a non-market, the absence of prices for outputs, data limitations and measurement challenges. Furthermore, public administrations are not homogeneous in scale nor scope, they respond to intricate institutional factors, path dependencies, socio-political arrangements, plus having economic and fiscal constraints. Nonetheless, the public sector is considered a large adopter of ICT technologies and commands a massive workforce, the empirical research on the issue is scant. This project aims to contribute to further understand the relationship between digitalization and public sector employment. The public sector vis-à-vis the business sector remains a relatively unexplored field as regards the effects of digitalization on the workforce. This paper presents an exploration of a dataset built by selecting and merging data from the World Bank's Worldwide Bureaucracy Indicators (WWBI) and the United Nations' e-Government Development Index (EGDI) for 16 European countries between 2008 and 2018. Three variables were chosen to run the initial exploration, a country level variable: 1) public sector employment as share of paid employment; and at the occupational level : 2) professionals; 3) technicians. Descriptive evidence shows heterogeneities among countries and years for the selected variables. Initial analyses show a positive sign coefficient when regressing the EGDI on the variables 1 and 2. But negative and significant coefficient for variable 3.
+The scholarly exploration of the linkages between digitalization and the organization of work has been conducted particularly focused on the private sector in advanced democracies, however there is a notorious gap in the empirical approximation to this question in a public sector context. In general, the public sector is considered a large adopter of Information and Communication Technologies (ICT) and commands a massive and diverse workforce. The impact of digital technologies on public sector workers have been conceptually acknowledged by the extant literature however there are some factors that make this line of inquiry particularly complex; the very nature of the public sector as a non-market, the absence of prices for outputs, data limitations and measurement challenges. The public sector is not homogeneous in scale or scope across and within countries, it responds to intricate institutional factors, path dependencies, socio-political arrangements, and economic and fiscal constraints. This chapter presents an exploration of a dataset built by selecting and merging data from the World Bank's Worldwide Bureaucracy Indicators (WWBI) and the United Nations' e-Government Development Index (EGDI) for 16 European countries between 2008 and 2018. Three variables were chosen to run the initial exploration, a country level variable: 1) public sector employment as share of paid employment; and at the occupational level : 2) professionals; 3) technicians. Descriptive evidence shows heterogeneities among countries and years for the selected variables. Initial analyses show a positive sign coefficient when regressing the EGDI on the variables 1 and 2. But negative and significant coefficient for variable 3.
 
 ## Introduction
 
 Establishing a territory (claiming centrality; make topic generalizations; review items of previous research) Establish a niche (counter-claiming; indicate a gap; raise questions; continuing a tradition) Occupy the niche (outline purposes; announce present research; announce principal findings; indicate structure)
 
+The research and academic debate on the impact of technological change on labor markets are far from new. Most empirical research regarding the effects of innovations, automation, and technological change on labor markets has been carried out covering the private sector in advanced democracies [@adams2018]. Studies in the business sector conducted in diverse European countries have found mixed results in the effects of automation technologies and industrial robots on labor, but negative effects on ICT and artificial intelligence [@nardis2021]. In the last couple of decades, the public sector has undergone incremental transformations toward the production and provision of its services with the assistance of digital technologies. Also, the rapid adoption of smartphones and the ample diffusion of social media is changing the interaction between public administrations, citizens, and firms. Research efforts have studied the potential effects of digital technologies on the public sector workforce, for the case of the Japanese public sector, mixed results were reported regarding the ICT impacts on staff reductions or substitution in the workforce [3], in a subsequent review publication, these inconclusive results on stuff reductions were corroborated [4].
+
 ## Literature Review
 
-Work
+Reviews previous the most accelerated adoption of digital technologies Danziger (2002)
+
+"It is striking that there are relatively few grounded, empirical studies of the impacts of IT on public administration in the journals analyzed." Danziger et al 2002
+
+De Nardis 2021 --\> Private sector "We then consider the possible correlation of labor displacement with globalization and international production networks." Public sector is a "non-tradable" sector? Critique to Gozgor.
 
 ## Methodology
 
 Process of data collection and techniques in data analysis
+
+\*\* Other variables: i.e. unionization rate -\> coefficients fail to prove statistically significant
 
 ## Results
 
 ## Discussion
 
 introduction (review findings; discuss outcomes; stake a claim) evaluation (analyze; offer explanations; reference the literature; state implications) limitations and recommendations
+
+Non-homogeneity --\> Very aggregate data.
+
+De Nardi -\> "The magnitude of either these possible effects, or their combination, very much depends on the nature of the job tasks to be carried out by workers and the kind of (displacing and reinstating) technologies being introduced. [...] Empirical evidence provided by econometric modeling confirmed the negative correlation between displacement and technological innovations (particularly in the form of investment in software) and the related risk of automation for concerned human labor. A correlation that appeared stronger in non-manufacturing sectors.:
 
 ## Conclusion
 
