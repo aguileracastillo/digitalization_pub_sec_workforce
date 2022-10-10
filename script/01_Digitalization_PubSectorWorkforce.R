@@ -15,10 +15,11 @@ library(naniar)
 library(visdat)
 library(ggplot2)
 library(here)
+library(readr)
 
 #### Upload the imputed df ####
 
-wwbi <- read_csv(here("Data", #### 27 countries- Worldwide Bureaucracy Indicators v.18 ####
+wwbi <- read_csv(here("Data", #### 24 countries- Worldwide Bureaucracy Indicators v.18 ####
                       "Raw",
                       "wwbi_impt_df.csv")) 
 wwbi <- wwbi[, -1] # delete unnecessary column that contain row indexes
@@ -37,7 +38,7 @@ gg_miss_var(wwbi,
             facet = country)
 
 
-un_egov_eu <- read_csv(here("Data", ### 25 countries- United Nations E-Government Index ####
+un_egov_eu <- read_csv(here("Data", ### 24 countries- United Nations E-Government Index ####
                             "Raw", 
                             "egov_08_18_eu.csv")) 
 un_egov_eu <- un_egov_eu[, -1] # delete unnecessary column that contain row indexes
@@ -141,12 +142,6 @@ gg_miss_var(master_df, facet = year)
 gg_miss_var(master_df, facet = country)
 
 levels(master_df$country_code)
-
-
-
-
-
-
 
 
 
