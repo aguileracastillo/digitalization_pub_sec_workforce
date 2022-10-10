@@ -1,0 +1,145 @@
+"","year","country_code","code_2","country","region","eu_member","lfpr"
+"1","2008","AUT","AT","Austria","Continental","EU",73.8925101265682
+"2","2010","AUT","AT","Austria","Continental","EU",74.4254272245125
+"3","2012","AUT","AT","Austria","Continental","EU",75.1133270134342
+"4","2014","AUT","AT","Austria","Continental","EU",75.381149109162
+"5","2016","AUT","AT","Austria","Continental","EU",76.2015934063179
+"6","2018","AUT","AT","Austria","Continental","EU",76.7899812636817
+"7","2008","BEL","BE","Belgium","Continental","EU",67.1068707592461
+"8","2010","BEL","BE","Belgium","Continental","EU",67.6639181558885
+"9","2012","BEL","BE","Belgium","Continental","EU",66.9352803483041
+"10","2014","BEL","BE","Belgium","Continental","EU",67.7221121470773
+"11","2016","BEL","BE","Belgium","Continental","EU",67.6234639229809
+"12","2018","BEL","BE","Belgium","Continental","EU",68.5947218210605
+"13","2008","CZE","CZ","Czech Republic","Eastern","EU",69.6723523696426
+"14","2010","CZE","CZ","Czech Republic","Eastern","EU",70.1698426716958
+"15","2012","CZE","CZ","Czech Republic","Eastern","EU",71.5893810510379
+"16","2014","CZE","CZ","Czech Republic","Eastern","EU",73.5177649890673
+"17","2016","CZE","CZ","Czech Republic","Eastern","EU",75.0001434979854
+"18","2018","CZE","CZ","Czech Republic","Eastern","EU",76.5685969532872
+"19","2008","FIN","FI","Finland","Nordic","EU",76.1164499717354
+"20","2010","FIN","FI","Finland","Nordic","EU",74.6344206974128
+"21","2012","FIN","FI","Finland","Nordic","EU",75.3902923644621
+"22","2014","FIN","FI","Finland","Nordic","EU",75.4798052134059
+"23","2016","FIN","FI","Finland","Nordic","EU",76.0387223744648
+"24","2018","FIN","FI","Finland","Nordic","EU",78.0384465724712
+"25","2008","FRA","FR","France","Continental","EU",69.5489548954896
+"26","2010","FRA","FR","France","Continental","EU",69.9842060502976
+"27","2012","FRA","FR","France","Continental","EU",70.4552636056489
+"28","2014","FRA","FR","France","Continental","EU",71.0143867349427
+"29","2016","FRA","FR","France","Continental","EU",71.4240297375951
+"30","2018","FRA","FR","France","Continental","EU",71.935097622364
+"31","2008","GRC","GR","Greece","Southern","EU",66.6594250418162
+"32","2010","GRC","GR","Greece","Southern","EU",67.8365442864342
+"33","2012","GRC","GR","Greece","Southern","EU",67.4698496124806
+"34","2014","GRC","GR","Greece","Southern","EU",67.4265045723134
+"35","2016","GRC","GR","Greece","Southern","EU",68.2165417149119
+"36","2018","GRC","GR","Greece","Southern","EU",68.1762081430427
+"37","2008","HUN","HU","Hungary","Eastern","EU",61.1988128174319
+"38","2010","HUN","HU","Hungary","Eastern","EU",61.9180522460364
+"39","2012","HUN","HU","Hungary","Eastern","EU",63.713363810961
+"40","2014","HUN","HU","Hungary","Eastern","EU",66.9829083439215
+"41","2016","HUN","HU","Hungary","Eastern","EU",70.1349197774034
+"42","2018","HUN","HU","Hungary","Eastern","EU",71.9434422681268
+"43","2008","ISL","IS","Iceland","Nordic","Non-EU",86.8720539214966
+"44","2010","ISL","IS","Iceland","Nordic","Non-EU",85.4623988397658
+"45","2012","ISL","IS","Iceland","Nordic","Non-EU",85.4982171721974
+"46","2014","ISL","IS","Iceland","Nordic","Non-EU",86.6720524704897
+"47","2016","ISL","IS","Iceland","Nordic","Non-EU",89.0493083608211
+"48","2018","ISL","IS","Iceland","Nordic","Non-EU",87.2831715536119
+"49","2008","IRL","IE","Ireland","Anglo-Saxon","EU",74.7971165807262
+"50","2010","IRL","IE","Ireland","Anglo-Saxon","EU",71.5707623696868
+"51","2012","IRL","IE","Ireland","Anglo-Saxon","EU",71.1303466726653
+"52","2014","IRL","IE","Ireland","Anglo-Saxon","EU",71.8463253878724
+"53","2016","IRL","IE","Ireland","Anglo-Saxon","EU",72.6621437457149
+"54","2018","IRL","IE","Ireland","Anglo-Saxon","EU",72.8785103627776
+"55","2008","ITA","IT","Italy","Southern","EU",62.9155035954565
+"56","2010","ITA","IT","Italy","Southern","EU",62.0138580067841
+"57","2012","ITA","IT","Italy","Southern","EU",63.4975323298424
+"58","2014","ITA","IT","Italy","Southern","EU",63.9392638817286
+"59","2016","ITA","IT","Italy","Southern","EU",64.940974470073
+"60","2018","ITA","IT","Italy","Southern","EU",65.6350265090148
+"61","2008","LUX","LU","Luxembourg","Continental","EU",66.7992249323273
+"62","2010","LUX","LU","Luxembourg","Continental","EU",68.2120799603931
+"63","2012","LUX","LU","Luxembourg","Continental","EU",69.4353301743001
+"64","2014","LUX","LU","Luxembourg","Continental","EU",70.8041778439675
+"65","2016","LUX","LU","Luxembourg","Continental","EU",69.9659702008107
+"66","2018","LUX","LU","Luxembourg","Continental","EU",71.0795319224836
+"67","2008","POL","PL","Poland","Eastern","EU",63.8257208014955
+"68","2010","POL","PL","Poland","Eastern","EU",65.3151253187628
+"69","2012","POL","PL","Poland","Eastern","EU",66.4883101923915
+"70","2014","POL","PL","Poland","Eastern","EU",67.8571569445144
+"71","2016","POL","PL","Poland","Eastern","EU",68.8090408076283
+"72","2018","POL","PL","Poland","Eastern","EU",70.1303104991396
+"73","2008","PRT","PT","Portugal","Southern","EU",73.9412205374488
+"74","2010","PRT","PT","Portugal","Southern","EU",73.6743776337585
+"75","2012","PRT","PT","Portugal","Southern","EU",73.4072175068982
+"76","2014","PRT","PT","Portugal","Southern","EU",73.2367831025341
+"77","2016","PRT","PT","Portugal","Southern","EU",73.7271054107329
+"78","2018","PRT","PT","Portugal","Southern","EU",75.1392888362447
+"79","2008","SVK","SK","Slovak Republic","Eastern","EU",68.8810101706726
+"80","2010","SVK","SK","Slovak Republic","Eastern","EU",68.6501423256063
+"81","2012","SVK","SK","Slovak Republic","Eastern","EU",69.4209260951788
+"82","2014","SVK","SK","Slovak Republic","Eastern","EU",70.2583363357002
+"83","2016","SVK","SK","Slovak Republic","Eastern","EU",71.8371619659021
+"84","2018","SVK","SK","Slovak Republic","Eastern","EU",72.3618751659152
+"85","2008","ESP","ES","Spain","Southern","EU",73.7894001337609
+"86","2010","ESP","ES","Spain","Southern","EU",74.553929727859
+"87","2012","ESP","ES","Spain","Southern","EU",75.2846772700871
+"88","2014","ESP","ES","Spain","Southern","EU",75.2642239033936
+"89","2016","ESP","ES","Spain","Southern","EU",75.3599521584067
+"90","2018","ESP","ES","Spain","Southern","EU",74.9042020707639
+"91","2008","CHE","CH","Switzerland","Continental","Non-EU",82.3119050995771
+"92","2010","CHE","CH","Switzerland","Continental","Non-EU",81.2996342745647
+"93","2012","CHE","CH","Switzerland","Continental","Non-EU",82.2859820126423
+"94","2014","CHE","CH","Switzerland","Continental","Non-EU",82.8810244851798
+"95","2016","CHE","CH","Switzerland","Continental","Non-EU",83.8730147242588
+"96","2018","CHE","CH","Switzerland","Continental","Non-EU",84.2076572011841
+"97","2008","GBR","GB","United Kingdom","Anglo-Saxon","EU",76.5302555799982
+"98","2010","GBR","GB","United Kingdom","Anglo-Saxon","EU",75.9919248797676
+"99","2012","GBR","GB","United Kingdom","Anglo-Saxon","EU",76.6299037737847
+"100","2014","GBR","GB","United Kingdom","Anglo-Saxon","EU",77.1778026870684
+"101","2016","GBR","GB","United Kingdom","Anglo-Saxon","EU",77.7058628929224
+"102","2018","GBR","GB","United Kingdom","Anglo-Saxon","EU",78.3223348504436
+"103","2008","BGR","BG","Bulgaria","Eastern","EU",67.7966575045211
+"104","2010","BGR","BG","Bulgaria","Eastern","EU",66.6926468554473
+"105","2012","BGR","BG","Bulgaria","Eastern","EU",67.1033092084386
+"106","2014","BGR","BG","Bulgaria","Eastern","EU",68.9954215448392
+"107","2016","BGR","BG","Bulgaria","Eastern","EU",68.6788781065412
+"108","2018","BGR","BG","Bulgaria","Eastern","EU",71.4983597719257
+"109","2008","HRV","HR","Croatia","Eastern","EU",65.7522751145853
+"110","2010","HRV","HR","Croatia","Eastern","EU",65.115501824017
+"111","2012","HRV","HR","Croatia","Eastern","EU",63.8801774275551
+"112","2014","HRV","HR","Croatia","Eastern","EU",66.0963671713665
+"113","2016","HRV","HR","Croatia","Eastern","EU",65.6052175587037
+"114","2018","HRV","HR","Croatia","Eastern","EU",66.3000215906234
+"115","2008","CYP","CY","Cyprus","Southern","EU",73.6330183797904
+"116","2010","CYP","CY","Cyprus","Southern","EU",73.6175789860642
+"117","2012","CYP","CY","Cyprus","Southern","EU",73.4787236922321
+"118","2014","CYP","CY","Cyprus","Southern","EU",74.2821435621004
+"119","2016","CYP","CY","Cyprus","Southern","EU",73.3878634546939
+"120","2018","CYP","CY","Cyprus","Southern","EU",74.9962002822398
+"121","2008","EST","EE","Estonia","Eastern","EU",74.1074192712302
+"122","2010","EST","EE","Estonia","Eastern","EU",73.806007218161
+"123","2012","EST","EE","Estonia","Eastern","EU",74.8338400602544
+"124","2014","EST","EE","Estonia","Eastern","EU",75.1942239256007
+"125","2016","EST","EE","Estonia","Eastern","EU",77.3680774459923
+"126","2018","EST","EE","Estonia","Eastern","EU",79.0210803450651
+"127","2008","LVA","LV","Latvia","Eastern","EU",74.1593263956621
+"128","2010","LVA","LV","Latvia","Eastern","EU",72.953366650237
+"129","2012","LVA","LV","Latvia","Eastern","EU",74.4092255235841
+"130","2014","LVA","LV","Latvia","Eastern","EU",74.5587236640626
+"131","2016","LVA","LV","Latvia","Eastern","EU",76.2989251391834
+"132","2018","LVA","LV","Latvia","Eastern","EU",77.6972593277386
+"133","2008","LTU","LT","Lithuania","Eastern","EU",68.4289356153015
+"134","2010","LTU","LT","Lithuania","Eastern","EU",70.2449228096669
+"135","2012","LTU","LT","Lithuania","Eastern","EU",71.8153533447284
+"136","2014","LTU","LT","Lithuania","Eastern","EU",73.7130014334558
+"137","2016","LTU","LT","Lithuania","Eastern","EU",75.465817814617
+"138","2018","LTU","LT","Lithuania","Eastern","EU",77.3115172033052
+"139","2008","ROU","RO","Romania","Eastern","EU",62.8718846699583
+"140","2010","ROU","RO","Romania","Eastern","EU",64.9278209454736
+"141","2012","ROU","RO","Romania","Eastern","EU",64.7862679559758
+"142","2014","ROU","RO","Romania","Eastern","EU",65.66804005661
+"143","2016","ROU","RO","Romania","Eastern","EU",65.5654462704045
+"144","2018","ROU","RO","Romania","Eastern","EU",67.7553239624988

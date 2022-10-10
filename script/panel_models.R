@@ -11,19 +11,19 @@ library(plm)
 library(stargazer)
 library(caret)
 library(gplots)
+library(here)
 
 
 ### Master df ####
 
-directory <- setwd("C:/Users/eagle/Dropbox/Shared_Lucho/Dissertation_Models/Data/RawSources/Clean DF - R/Imputed_master_df")
-###directory <- setwd("C:/Users/Andres/Dropbox/Shared_Lucho/Dissertation_Models/Data/RawSources/Clean DF - R")
-imp_master_df <- read_csv("imp_master_df.csv") # 27 countries - Worldwide Bureaucracy Indicators version 18 indicators
-imp_master_df <- imp_master_df[, -1]
+imp_master_df <- read_csv(here("Data", # 27 countries - Worldwide Bureaucracy Indicators v.18
+                               "Processed", 
+                               "imp_master_df.csv")) 
+imp_master_df <- imp_master_df[, -c(1, 4, 7)] # delete unnecessary columns
 
+imp_master_df[, 1:4] <- lapply(imp_master_df[1:4], 
+                               as.factor ) # change the var type as factor from 1 to 4 column
 
-
-imp_master_df[, 1:6] <- lapply(imp_master_df[1:6], as.factor )
-imp_master_df <- imp_master_df[, -c(3, 6)]
 str(imp_master_df)
 summary(imp_master_df)
 vis_dat(imp_master_df)

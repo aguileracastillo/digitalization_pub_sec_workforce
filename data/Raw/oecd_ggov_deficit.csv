@@ -1,0 +1,139 @@
+"","year","country_code","code_2","country","region","eu_member","ggov_deficit"
+"1","2008","AUT","AT","Austria","Continental","EU",-1.49526533239112
+"2","2010","AUT","AT","Austria","Continental","EU",-4.4412670586594
+"3","2012","AUT","AT","Austria","Continental","EU",-2.1890705954037
+"4","2014","AUT","AT","Austria","Continental","EU",-2.72914820817187
+"5","2016","AUT","AT","Austria","Continental","EU",-1.53459116331167
+"6","2018","AUT","AT","Austria","Continental","EU",0.175390981189136
+"7","2008","BEL","BE","Belgium","Continental","EU",-1.09534486959375
+"8","2010","BEL","BE","Belgium","Continental","EU",-4.08770609470009
+"9","2012","BEL","BE","Belgium","Continental","EU",-4.31838232799818
+"10","2014","BEL","BE","Belgium","Continental","EU",-3.0556821743147
+"11","2016","BEL","BE","Belgium","Continental","EU",-2.36311261975241
+"12","2018","BEL","BE","Belgium","Continental","EU",-0.793754563773811
+"13","2008","CZE","CZ","Czech Republic","Eastern","EU",-1.96420355886674
+"14","2010","CZE","CZ","Czech Republic","Eastern","EU",-4.15200094167854
+"15","2012","CZE","CZ","Czech Republic","Eastern","EU",-3.8971002555203
+"16","2014","CZE","CZ","Czech Republic","Eastern","EU",-2.07549140933957
+"17","2016","CZE","CZ","Czech Republic","Eastern","EU",0.711776192532093
+"18","2018","CZE","CZ","Czech Republic","Eastern","EU",0.912847653228065
+"19","2008","DNK","DK","Denmark","Nordic","EU",3.17390813019585
+"20","2010","DNK","DK","Denmark","Nordic","EU",-2.71027147514494
+"21","2012","DNK","DK","Denmark","Nordic","EU",-3.49044439711785
+"22","2014","DNK","DK","Denmark","Nordic","EU",1.14442765256798
+"23","2016","DNK","DK","Denmark","Nordic","EU",-0.105986872094072
+"24","2018","DNK","DK","Denmark","Nordic","EU",0.691173692510706
+"25","2008","FIN","FI","Finland","Nordic","EU",4.17676884667851
+"26","2010","FIN","FI","Finland","Nordic","EU",-2.53371106020421
+"27","2012","FIN","FI","Finland","Nordic","EU",-2.15582206260539
+"28","2014","FIN","FI","Finland","Nordic","EU",-2.9874768604668
+"29","2016","FIN","FI","Finland","Nordic","EU",-1.69825025974862
+"30","2018","FIN","FI","Finland","Nordic","EU",-0.886164278589501
+"31","2008","FRA","FR","France","Continental","EU",-3.26373482970116
+"32","2010","FRA","FR","France","Continental","EU",-6.88672167290052
+"33","2012","FRA","FR","France","Continental","EU",-4.98098433361866
+"34","2014","FRA","FR","France","Continental","EU",-3.90465934648671
+"35","2016","FRA","FR","France","Continental","EU",-3.63725639835479
+"36","2018","FRA","FR","France","Continental","EU",-2.29102799312234
+"37","2008","DEU","DE","Germany","Continental","EU",-0.116356239372627
+"38","2010","DEU","DE","Germany","Continental","EU",-4.37864607705506
+"39","2012","DEU","DE","Germany","Continental","EU",0.009324994262943
+"40","2014","DEU","DE","Germany","Continental","EU",0.579552713472226
+"41","2016","DEU","DE","Germany","Continental","EU",1.16035141670442
+"42","2018","DEU","DE","Germany","Continental","EU",1.83663497606073
+"43","2008","GRC","GR","Greece","Southern","EU",-10.1760239361008
+"44","2010","GRC","GR","Greece","Southern","EU",-11.2924079917294
+"45","2012","GRC","GR","Greece","Southern","EU",-8.9978849939655
+"46","2014","GRC","GR","Greece","Southern","EU",-3.58444899904709
+"47","2016","GRC","GR","Greece","Southern","EU",0.543512768175437
+"48","2018","GRC","GR","Greece","Southern","EU",1.02099124007557
+"49","2008","HUN","HU","Hungary","Eastern","EU",-3.78710797316346
+"50","2010","HUN","HU","Hungary","Eastern","EU",-4.43559849762698
+"51","2012","HUN","HU","Hungary","Eastern","EU",-2.33049231389502
+"52","2014","HUN","HU","Hungary","Eastern","EU",-2.78013933587436
+"53","2016","HUN","HU","Hungary","Eastern","EU",-1.79879346217717
+"54","2018","HUN","HU","Hungary","Eastern","EU",-2.11616739883121
+"55","2008","ISL","IS","Iceland","Nordic","Non-EU",-11.7761600429802
+"56","2010","ISL","IS","Iceland","Nordic","Non-EU",-6.35240036816246
+"57","2012","ISL","IS","Iceland","Nordic","Non-EU",-2.38290316029591
+"58","2014","ISL","IS","Iceland","Nordic","Non-EU",0.547069640242845
+"59","2016","ISL","IS","Iceland","Nordic","Non-EU",12.855673273245
+"60","2018","ISL","IS","Iceland","Nordic","Non-EU",0.922278554539663
+"61","2008","IRL","IE","Ireland","Anglo-Saxon","EU",-7.0178551283694
+"62","2010","IRL","IE","Ireland","Anglo-Saxon","EU",-32.0646272197353
+"63","2012","IRL","IE","Ireland","Anglo-Saxon","EU",-8.10666727354445
+"64","2014","IRL","IE","Ireland","Anglo-Saxon","EU",-3.63439031666768
+"65","2016","IRL","IE","Ireland","Anglo-Saxon","EU",-0.666653928189953
+"66","2018","IRL","IE","Ireland","Anglo-Saxon","EU",0.116304513715355
+"67","2008","ITA","IT","Italy","Southern","EU",-2.56390153162418
+"68","2010","ITA","IT","Italy","Southern","EU",-4.23973644794317
+"69","2012","ITA","IT","Italy","Southern","EU",-2.94540854800113
+"70","2014","ITA","IT","Italy","Southern","EU",-2.95439563437658
+"71","2016","ITA","IT","Italy","Southern","EU",-2.40389888634585
+"72","2018","ITA","IT","Italy","Southern","EU",-2.20189783187285
+"73","2008","LUX","LU","Luxembourg","Continental","EU",3.53144619780107
+"74","2010","LUX","LU","Luxembourg","Continental","EU",-0.274646765234503
+"75","2012","LUX","LU","Luxembourg","Continental","EU",0.531931779708037
+"76","2014","LUX","LU","Luxembourg","Continental","EU",1.37449158452268
+"77","2016","LUX","LU","Luxembourg","Continental","EU",1.92228315577715
+"78","2018","LUX","LU","Luxembourg","Continental","EU",3.06628208856958
+"79","2008","NOR","NO","Norway","Nordic","Non-EU",18.6327668012995
+"80","2010","NOR","NO","Norway","Nordic","Non-EU",10.9227201918287
+"81","2012","NOR","NO","Norway","Nordic","Non-EU",13.7625406833144
+"82","2014","NOR","NO","Norway","Nordic","Non-EU",8.62298754399337
+"83","2016","NOR","NO","Norway","Nordic","Non-EU",4.05945745651919
+"84","2018","NOR","NO","Norway","Nordic","Non-EU",7.86704746897774
+"85","2008","POL","PL","Poland","Eastern","EU",-3.60610188002063
+"86","2010","POL","PL","Poland","Eastern","EU",-7.40086699049794
+"87","2012","POL","PL","Poland","Eastern","EU",-3.79077293799224
+"88","2014","POL","PL","Poland","Eastern","EU",-3.64576705601305
+"89","2016","POL","PL","Poland","Eastern","EU",-2.38584975371441
+"90","2018","POL","PL","Poland","Eastern","EU",-0.241662365576193
+"91","2008","PRT","PT","Portugal","Southern","EU",-3.69958297855799
+"92","2010","PRT","PT","Portugal","Southern","EU",-11.3983938569745
+"93","2012","PRT","PT","Portugal","Southern","EU",-6.17976400792822
+"94","2014","PRT","PT","Portugal","Southern","EU",-7.35602166381993
+"95","2016","PRT","PT","Portugal","Southern","EU",-1.9350229616566
+"96","2018","PRT","PT","Portugal","Southern","EU",-0.348984602726866
+"97","2008","SVK","SK","Slovak Republic","Eastern","EU",-2.52342400483425
+"98","2010","SVK","SK","Slovak Republic","Eastern","EU",-7.5360046712758
+"99","2012","SVK","SK","Slovak Republic","Eastern","EU",-4.35620278065433
+"100","2014","SVK","SK","Slovak Republic","Eastern","EU",-3.10748163896433
+"101","2016","SVK","SK","Slovak Republic","Eastern","EU",-2.58122308138928
+"102","2018","SVK","SK","Slovak Republic","Eastern","EU",-0.990307791791043
+"103","2008","ESP","ES","Spain","Southern","EU",-4.57225104795587
+"104","2010","ESP","ES","Spain","Southern","EU",-9.52662837731389
+"105","2012","ESP","ES","Spain","Southern","EU",-10.7357295468233
+"106","2014","ESP","ES","Spain","Southern","EU",-5.91537342151105
+"107","2016","ESP","ES","Spain","Southern","EU",-4.30519643754938
+"108","2018","ESP","ES","Spain","Southern","EU",-2.48289171353575
+"109","2008","GBR","GB","United Kingdom","Anglo-Saxon","EU",-5.12565919085561
+"110","2010","GBR","GB","United Kingdom","Anglo-Saxon","EU",-9.23079126316058
+"111","2012","GBR","GB","United Kingdom","Anglo-Saxon","EU",-8.13193361257646
+"112","2014","GBR","GB","United Kingdom","Anglo-Saxon","EU",-5.53180662670262
+"113","2016","GBR","GB","United Kingdom","Anglo-Saxon","EU",-3.27896959561079
+"114","2018","GBR","GB","United Kingdom","Anglo-Saxon","EU",-2.23733210321077
+"115","2008","EST","EE","Estonia","Eastern","EU",-2.64450308630038
+"116","2010","EST","EE","Estonia","Eastern","EU",0.188416410738301
+"117","2012","EST","EE","Estonia","Eastern","EU",-0.28475291302784
+"118","2014","EST","EE","Estonia","Eastern","EU",0.703171822760364
+"119","2016","EST","EE","Estonia","Eastern","EU",-0.408545012579835
+"120","2018","EST","EE","Estonia","Eastern","EU",-0.503130316832033
+"121","2008","SVN","SI","Slovenia","Eastern","EU",-1.39378936290063
+"122","2010","SVN","SI","Slovenia","Eastern","EU",-5.59967785681504
+"123","2012","SVN","SI","Slovenia","Eastern","EU",-3.99471109951664
+"124","2014","SVN","SI","Slovenia","Eastern","EU",-5.50719270783563
+"125","2016","SVN","SI","Slovenia","Eastern","EU",-1.91911358449142
+"126","2018","SVN","SI","Slovenia","Eastern","EU",0.735342560160001
+"127","2008","LVA","LV","Latvia","Eastern","EU",-4.26428632809495
+"128","2010","LVA","LV","Latvia","Eastern","EU",-8.64641147457237
+"129","2012","LVA","LV","Latvia","Eastern","EU",-1.40290315264232
+"130","2014","LVA","LV","Latvia","Eastern","EU",-1.58419338432305
+"131","2016","LVA","LV","Latvia","Eastern","EU",0.153349993501651
+"132","2018","LVA","LV","Latvia","Eastern","EU",-0.812317691330875
+"133","2008","LTU","LT","Lithuania","Eastern","EU",-3.08645102049608
+"134","2010","LTU","LT","Lithuania","Eastern","EU",-6.90044406128606
+"135","2012","LTU","LT","Lithuania","Eastern","EU",-3.1404678031105
+"136","2014","LTU","LT","Lithuania","Eastern","EU",-0.618330041270553
+"137","2016","LTU","LT","Lithuania","Eastern","EU",0.232271328584837
+"138","2018","LTU","LT","Lithuania","Eastern","EU",0.597479913700932

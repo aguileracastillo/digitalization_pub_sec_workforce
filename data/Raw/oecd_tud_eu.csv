@@ -1,0 +1,122 @@
+"","year","country_code","code_2","country","region","eu_member","tud"
+"1","2016","AUT","AT","Austria","Continental","EU",26.9
+"2","2018","AUT","AT","Austria","Continental","EU",26.3
+"3","2008","AUT","AT","Austria","Continental","EU",29.6
+"4","2014","AUT","AT","Austria","Continental","EU",27.7
+"5","2010","AUT","AT","Austria","Continental","EU",28.9
+"6","2012","AUT","AT","Austria","Continental","EU",28
+"7","2018","BEL","BE","Belgium","Continental","EU",50.3
+"8","2016","BEL","BE","Belgium","Continental","EU",52.8
+"9","2010","BEL","BE","Belgium","Continental","EU",53.8
+"10","2008","BEL","BE","Belgium","Continental","EU",54.5
+"11","2012","BEL","BE","Belgium","Continental","EU",55
+"12","2014","BEL","BE","Belgium","Continental","EU",53.8
+"13","2018","CZE","CZ","Czech Republic","Eastern","EU",11.5
+"14","2010","CZE","CZ","Czech Republic","Eastern","EU",16.1
+"15","2016","CZE","CZ","Czech Republic","Eastern","EU",12
+"16","2014","CZE","CZ","Czech Republic","Eastern","EU",12.9
+"17","2008","CZE","CZ","Czech Republic","Eastern","EU",16.9
+"18","2012","CZE","CZ","Czech Republic","Eastern","EU",14.8
+"19","2008","DEU","DE","Germany","Continental","EU",19
+"20","2010","DEU","DE","Germany","Continental","EU",18.9
+"21","2012","DEU","DE","Germany","Continental","EU",18.3
+"22","2014","DEU","DE","Germany","Continental","EU",17.7
+"23","2018","DEU","DE","Germany","Continental","EU",16.5
+"24","2016","DEU","DE","Germany","Continental","EU",17
+"25","2008","DNK","DK","Denmark","Nordic","EU",67.6
+"26","2010","DNK","DK","Denmark","Nordic","EU",67.2
+"27","2012","DNK","DK","Denmark","Nordic","EU",68
+"28","2014","DNK","DK","Denmark","Nordic","EU",67.4
+"29","2018","DNK","DK","Denmark","Nordic","EU",66.5
+"30","2016","DNK","DK","Denmark","Nordic","EU",65.5
+"31","2012","ESP","ES","Spain","Southern","EU",18.2
+"32","2008","ESP","ES","Spain","Southern","EU",17.5
+"33","2010","ESP","ES","Spain","Southern","EU",18.3
+"34","2014","ESP","ES","Spain","Southern","EU",16.8
+"35","2016","ESP","ES","Spain","Southern","EU",14.8
+"36","2018","ESP","ES","Spain","Southern","EU",13.6
+"37","2016","EST","EE","Estonia","Eastern","EU",4.4
+"38","2008","EST","EE","Estonia","Eastern","EU",7
+"39","2014","EST","EE","Estonia","Eastern","EU",5.5
+"40","2010","EST","EE","Estonia","Eastern","EU",8.1
+"41","2018","EST","EE","Estonia","Eastern","EU",4.3
+"42","2012","EST","EE","Estonia","Eastern","EU",6.1
+"43","2014","FIN","FI","Finland","Nordic","EU",67.6
+"44","2016","FIN","FI","Finland","Nordic","EU",64.9
+"45","2008","FIN","FI","Finland","Nordic","EU",69.9
+"46","2012","FIN","FI","Finland","Nordic","EU",69.6
+"47","2018","FIN","FI","Finland","Nordic","EU",60.3
+"48","2010","FIN","FI","Finland","Nordic","EU",70.3
+"49","2012","FRA","FR","France","Continental","EU",9.1
+"50","2018","FRA","FR","France","Continental","EU",8.8
+"51","2008","FRA","FR","France","Continental","EU",8.5
+"52","2010","FRA","FR","France","Continental","EU",9
+"53","2016","FRA","FR","France","Continental","EU",9
+"54","2014","FRA","FR","France","Continental","EU",9
+"55","2014","GBR","GB","United Kingdom","Anglo-Saxon","EU",25
+"56","2016","GBR","GB","United Kingdom","Anglo-Saxon","EU",23.7
+"57","2008","GBR","GB","United Kingdom","Anglo-Saxon","EU",27
+"58","2018","GBR","GB","United Kingdom","Anglo-Saxon","EU",23.4
+"59","2012","GBR","GB","United Kingdom","Anglo-Saxon","EU",26.1
+"60","2010","GBR","GB","United Kingdom","Anglo-Saxon","EU",26.8
+"61","2016","GRC","GR","Greece","Southern","EU",20.2
+"62","2010","GRC","GR","Greece","Southern","EU",22.2
+"63","2012","HUN","HU","Hungary","Eastern","EU",11.8
+"64","2014","HUN","HU","Hungary","Eastern","EU",10.2
+"65","2008","HUN","HU","Hungary","Eastern","EU",14.4
+"66","2016","HUN","HU","Hungary","Eastern","EU",8.5
+"67","2018","HUN","HU","Hungary","Eastern","EU",7.9
+"68","2008","IRL","IE","Ireland","Anglo-Saxon","EU",30.1
+"69","2010","IRL","IE","Ireland","Anglo-Saxon","EU",33.5
+"70","2016","IRL","IE","Ireland","Anglo-Saxon","EU",25.6
+"71","2008","ISL","IS","Iceland","Nordic","Non-EU",86.4
+"72","2016","ISL","IS","Iceland","Nordic","Non-EU",89.8
+"73","2018","ISL","IS","Iceland","Nordic","Non-EU",91.8
+"74","2008","ITA","IT","Italy","Southern","EU",33.4
+"75","2010","ITA","IT","Italy","Southern","EU",35.5
+"76","2012","ITA","IT","Italy","Southern","EU",36.3
+"77","2014","ITA","IT","Italy","Southern","EU",36.4
+"78","2016","ITA","IT","Italy","Southern","EU",34.4
+"79","2018","ITA","IT","Italy","Southern","EU",34.4
+"80","2008","LTU","LT","Lithuania","Eastern","EU",8.9
+"81","2010","LTU","LT","Lithuania","Eastern","EU",10.1
+"82","2012","LTU","LT","Lithuania","Eastern","EU",9
+"83","2014","LTU","LT","Lithuania","Eastern","EU",8.1
+"84","2016","LTU","LT","Lithuania","Eastern","EU",7.7
+"85","2018","LTU","LT","Lithuania","Eastern","EU",7.1
+"86","2012","LUX","LU","Luxembourg","Continental","EU",35.3
+"87","2014","LUX","LU","Luxembourg","Continental","EU",34.1
+"88","2010","LUX","LU","Luxembourg","Continental","EU",35.1
+"89","2016","LUX","LU","Luxembourg","Continental","EU",32.3
+"90","2008","LUX","LU","Luxembourg","Continental","EU",36.5
+"91","2018","LUX","LU","Luxembourg","Continental","EU",31.8
+"92","2008","LVA","LV","Latvia","Eastern","EU",15.1
+"93","2014","LVA","LV","Latvia","Eastern","EU",12.7
+"94","2010","LVA","LV","Latvia","Eastern","EU",15
+"95","2016","LVA","LV","Latvia","Eastern","EU",12.3
+"96","2018","LVA","LV","Latvia","Eastern","EU",11.9
+"97","2012","LVA","LV","Latvia","Eastern","EU",13.1
+"98","2014","NOR","NO","Norway","Nordic","Non-EU",49.7
+"99","2016","NOR","NO","Norway","Nordic","Non-EU",49.3
+"100","2018","NOR","NO","Norway","Nordic","Non-EU",49.2
+"101","2010","NOR","NO","Norway","Nordic","Non-EU",50
+"102","2012","NOR","NO","Norway","Nordic","Non-EU",49.3
+"103","2008","NOR","NO","Norway","Nordic","Non-EU",49.4
+"104","2010","POL","PL","Poland","Eastern","EU",18.3
+"105","2016","POL","PL","Poland","Eastern","EU",12.7
+"106","2008","POL","PL","Poland","Eastern","EU",15.2
+"107","2014","POL","PL","Poland","Eastern","EU",15
+"108","2012","POL","PL","Poland","Eastern","EU",15.4
+"109","2008","PRT","PT","Portugal","Southern","EU",20.7
+"110","2010","PRT","PT","Portugal","Southern","EU",19.6
+"111","2016","PRT","PT","Portugal","Southern","EU",15.3
+"112","2008","SVK","SK","Slovak Republic","Eastern","EU",17.2
+"113","2010","SVK","SK","Slovak Republic","Eastern","EU",15.2
+"114","2012","SVK","SK","Slovak Republic","Eastern","EU",13.6
+"115","2016","SVK","SK","Slovak Republic","Eastern","EU",10.7
+"116","2014","SVK","SK","Slovak Republic","Eastern","EU",12.8
+"117","2014","SVN","SI","Slovenia","Eastern","EU",26.4
+"118","2016","SVN","SI","Slovenia","Eastern","EU",20.4
+"119","2008","SVN","SI","Slovenia","Eastern","EU",27.3
+"120","2010","SVN","SI","Slovenia","Eastern","EU",29.6
+"121","2012","SVN","SI","Slovenia","Eastern","EU",23.9

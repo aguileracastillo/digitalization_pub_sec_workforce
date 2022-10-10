@@ -1,0 +1,136 @@
+"","year","country_code","code_2","country","region","eu_member","ggov_debt"
+"1","2008","AUT","AT","Austria","Continental","EU",74.19278
+"2","2010","AUT","AT","Austria","Continental","EU",90.54397
+"3","2012","AUT","AT","Austria","Continental","EU",97.33756
+"4","2014","AUT","AT","Austria","Continental","EU",101.8692
+"5","2016","AUT","AT","Austria","Continental","EU",102.5335
+"6","2018","AUT","AT","Austria","Continental","EU",90.95426
+"7","2008","BEL","BE","Belgium","Continental","EU",102.3672
+"8","2010","BEL","BE","Belgium","Continental","EU",108.6802
+"9","2012","BEL","BE","Belgium","Continental","EU",120.9875
+"10","2014","BEL","BE","Belgium","Continental","EU",130.6104
+"11","2016","BEL","BE","Belgium","Continental","EU",127.6711
+"12","2018","BEL","BE","Belgium","Continental","EU",117.6529
+"13","2008","CZE","CZ","Czech Republic","Eastern","EU",32.96545
+"14","2010","CZE","CZ","Czech Republic","Eastern","EU",44.05919
+"15","2012","CZE","CZ","Czech Republic","Eastern","EU",56.23002
+"16","2014","CZE","CZ","Czech Republic","Eastern","EU",54.84251
+"17","2016","CZE","CZ","Czech Republic","Eastern","EU",47.43294
+"18","2018","CZE","CZ","Czech Republic","Eastern","EU",39.73836
+"19","2008","DNK","DK","Denmark","Nordic","EU",41.93992
+"20","2010","DNK","DK","Denmark","Nordic","EU",53.44129
+"21","2012","DNK","DK","Denmark","Nordic","EU",60.61518
+"22","2014","DNK","DK","Denmark","Nordic","EU",59.14192
+"23","2016","DNK","DK","Denmark","Nordic","EU",55.11341
+"24","2018","DNK","DK","Denmark","Nordic","EU",50.82243
+"25","2008","FIN","FI","Finland","Nordic","EU",38.17002
+"26","2010","FIN","FI","Finland","Nordic","EU",54.80778
+"27","2012","FIN","FI","Finland","Nordic","EU",63.98922
+"28","2014","FIN","FI","Finland","Nordic","EU",71.26928
+"29","2016","FIN","FI","Finland","Nordic","EU",75.60892
+"30","2018","FIN","FI","Finland","Nordic","EU",69.7925
+"31","2008","FRA","FR","France","Continental","EU",82.50349
+"32","2010","FRA","FR","France","Continental","EU",100.9953
+"33","2012","FRA","FR","France","Continental","EU",111.9382
+"34","2014","FRA","FR","France","Continental","EU",120.1551
+"35","2016","FRA","FR","France","Continental","EU",123.6707
+"36","2018","FRA","FR","France","Continental","EU",121.3599
+"37","2008","DEU","DE","Germany","Continental","EU",70.70988
+"38","2010","DEU","DE","Germany","Continental","EU",87.40637
+"39","2012","DEU","DE","Germany","Continental","EU",88.85776
+"40","2014","DEU","DE","Germany","Continental","EU",84.10702
+"41","2016","DEU","DE","Germany","Continental","EU",77.22083
+"42","2018","DEU","DE","Germany","Continental","EU",69.58807
+"43","2008","GRC","GR","Greece","Southern","EU",117.4964
+"44","2010","GRC","GR","Greece","Southern","EU",130.1988
+"45","2012","GRC","GR","Greece","Southern","EU",167.9104
+"46","2014","GRC","GR","Greece","Southern","EU",183.6562
+"47","2016","GRC","GR","Greece","Southern","EU",189.4006
+"48","2018","GRC","GR","Greece","Southern","EU",199.0986
+"49","2008","HUN","HU","Hungary","Eastern","EU",75.83703
+"50","2010","HUN","HU","Hungary","Eastern","EU",86.23153
+"51","2012","HUN","HU","Hungary","Eastern","EU",98.6748
+"52","2014","HUN","HU","Hungary","Eastern","EU",100.8193
+"53","2016","HUN","HU","Hungary","Eastern","EU",98.75479
+"54","2018","HUN","HU","Hungary","Eastern","EU",86.52464
+"55","2008","IRL","IE","Ireland","Anglo-Saxon","EU",47.50946
+"56","2010","IRL","IE","Ireland","Anglo-Saxon","EU",83.52174
+"57","2012","IRL","IE","Ireland","Anglo-Saxon","EU",129.4477
+"58","2014","IRL","IE","Ireland","Anglo-Saxon","EU",121.336
+"59","2016","IRL","IE","Ireland","Anglo-Saxon","EU",84.9169
+"60","2018","IRL","IE","Ireland","Anglo-Saxon","EU",74.37717
+"61","2008","ITA","IT","Italy","Southern","EU",112.5272
+"62","2010","ITA","IT","Italy","Southern","EU",124.3316
+"63","2012","ITA","IT","Italy","Southern","EU",135.375
+"64","2014","ITA","IT","Italy","Southern","EU",155.6326
+"65","2016","ITA","IT","Italy","Southern","EU",154.5501
+"66","2018","ITA","IT","Italy","Southern","EU",146.8302
+"67","2008","LUX","LU","Luxembourg","Continental","EU",25.80629
+"68","2010","LUX","LU","Luxembourg","Continental","EU",29.0025
+"69","2012","LUX","LU","Luxembourg","Continental","EU",29.70999
+"70","2014","LUX","LU","Luxembourg","Continental","EU",30.55047
+"71","2016","LUX","LU","Luxembourg","Continental","EU",27.86612
+"72","2018","LUX","LU","Luxembourg","Continental","EU",28.83572
+"73","2008","NOR","NO","Norway","Nordic","Non-EU",54.77628
+"74","2010","NOR","NO","Norway","Nordic","Non-EU",49.23193
+"75","2012","NOR","NO","Norway","Nordic","Non-EU",35.8749
+"76","2014","NOR","NO","Norway","Nordic","Non-EU",34.71998
+"77","2016","NOR","NO","Norway","Nordic","Non-EU",44.2576
+"78","2018","NOR","NO","Norway","Nordic","Non-EU",45.34069
+"79","2008","POL","PL","Poland","Eastern","EU",53.87738
+"80","2010","POL","PL","Poland","Eastern","EU",61.68219
+"81","2012","POL","PL","Poland","Eastern","EU",65.55442
+"82","2014","POL","PL","Poland","Eastern","EU",71.43756
+"83","2016","POL","PL","Poland","Eastern","EU",73.00764
+"84","2018","POL","PL","Poland","Eastern","EU",66.75915
+"85","2008","PRT","PT","Portugal","Southern","EU",84.4994
+"86","2010","PRT","PT","Portugal","Southern","EU",105.6683
+"87","2012","PRT","PT","Portugal","Southern","EU",137.316
+"88","2014","PRT","PT","Portugal","Southern","EU",150.745
+"89","2016","PRT","PT","Portugal","Southern","EU",144.3118
+"90","2018","PRT","PT","Portugal","Southern","EU",137.3219
+"91","2008","SVK","SK","Slovak Republic","Eastern","EU",34.8899
+"92","2010","SVK","SK","Slovak Republic","Eastern","EU",48.75501
+"93","2012","SVK","SK","Slovak Republic","Eastern","EU",60.77532
+"94","2014","SVK","SK","Slovak Republic","Eastern","EU",67.82887
+"95","2016","SVK","SK","Slovak Republic","Eastern","EU",67.74002
+"96","2018","SVK","SK","Slovak Republic","Eastern","EU",63.46797
+"97","2008","ESP","ES","Spain","Southern","EU",47.68485
+"98","2010","ESP","ES","Spain","Southern","EU",67.3768
+"99","2012","ESP","ES","Spain","Southern","EU",93.4564
+"100","2014","ESP","ES","Spain","Southern","EU",119.4734
+"101","2016","ESP","ES","Spain","Southern","EU",117.3305
+"102","2018","ESP","ES","Spain","Southern","EU",114.5046
+"103","2008","GBR","GB","United Kingdom","Anglo-Saxon","EU",65.69854
+"104","2010","GBR","GB","United Kingdom","Anglo-Saxon","EU",89.43959
+"105","2012","GBR","GB","United Kingdom","Anglo-Saxon","EU",107.4202
+"106","2014","GBR","GB","United Kingdom","Anglo-Saxon","EU",113.1906
+"107","2016","GBR","GB","United Kingdom","Anglo-Saxon","EU",119.7748
+"108","2018","GBR","GB","United Kingdom","Anglo-Saxon","EU",113.8455
+"109","2008","EST","EE","Estonia","Eastern","EU",8.461208
+"110","2010","EST","EE","Estonia","Eastern","EU",11.81707
+"111","2012","EST","EE","Estonia","Eastern","EU",13.01775
+"112","2014","EST","EE","Estonia","Eastern","EU",13.7235
+"113","2016","EST","EE","Estonia","Eastern","EU",13.58139
+"114","2018","EST","EE","Estonia","Eastern","EU",12.93989
+"115","2008","SVN","SI","Slovenia","Eastern","EU",29.8953
+"116","2010","SVN","SI","Slovenia","Eastern","EU",47.86614
+"117","2012","SVN","SI","Slovenia","Eastern","EU",61.51445
+"118","2014","SVN","SI","Slovenia","Eastern","EU",99.25522
+"119","2016","SVN","SI","Slovenia","Eastern","EU",97.20789
+"120","2018","SVN","SI","Slovenia","Eastern","EU",82.9892
+"121","2008","ISL","IS","Iceland","Nordic","Non-EU",92.83931
+"122","2010","ISL","IS","Iceland","Nordic","Non-EU",110.3226
+"123","2012","ISL","IS","Iceland","Nordic","Non-EU",115.6603
+"124","2008","LVA","LV","Latvia","Eastern","EU",23.20444
+"125","2010","LVA","LV","Latvia","Eastern","EU",53.99846
+"126","2012","LVA","LV","Latvia","Eastern","EU",48.70946
+"127","2014","LVA","LV","Latvia","Eastern","EU",50.89373
+"128","2016","LVA","LV","Latvia","Eastern","EU",49.82199
+"129","2018","LVA","LV","Latvia","Eastern","EU",45.7956
+"130","2008","LTU","LT","Lithuania","Eastern","EU",17.13637
+"131","2010","LTU","LT","Lithuania","Eastern","EU",45.47081
+"132","2012","LTU","LT","Lithuania","Eastern","EU",51.18573
+"133","2014","LTU","LT","Lithuania","Eastern","EU",52.58745
+"134","2016","LTU","LT","Lithuania","Eastern","EU",50.88945
+"135","2018","LTU","LT","Lithuania","Eastern","EU",40.67271
