@@ -3,7 +3,7 @@
 
 # This script merges databases from different sources
 # these databases filtered out countries that are not present in all the databases
-# at the same time missing valued were imputed.
+# at the same time missing values were imputed.
 
 #### Installing and loading  needed packages ####
 library(readxl)
