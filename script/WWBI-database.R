@@ -9,10 +9,9 @@ library(visdat)
 library(ggplot2)
 library(countrycode)
 library(here)
+library(mice)
 
 #### Loading the excel files ####
-# directory<- setwd ("~/Dropbox/PhD Andrew/Dissertation_Models/Data/RawSources/WorldBureaucracyIndicators/WWBI_csv")
-#directorya <- setwd("C:/Users/Andres/Dropbox/Shared_Lucho/Dissertation_Models/Data/RawSources/WorldBureaucracyIndicators/WWBI_csv")
 
 wwbi <- read_excel(here("Data", 
                         "Raw", 
@@ -28,8 +27,8 @@ countries_info <- read_excel(here("Data",
                                   "Processed",
                                   "WWBICountry.xlsx")) # loading country info (codes,  regions etc)
 
-countries_info <- countries_info[, c(1,2,5,8)] %>%  # renaming the columns of country info
-                  rename(country_code = "Country Code", 
+countries_info <- countries_info[, c(1,2,5,8)] %>%  # choosing the 4 columns of our interest
+                  rename(country_code = "Country Code", # renaming the columns of country info
                          country = `Short Name`, 
                          code_2 = `2-alpha code`, 
                          region= Region)
@@ -105,32 +104,39 @@ wwbi_eu <- wwbi_eu %>%
          wbill_per_gdp = BI.WAG.TOTL.GD.ZS,# Wage bill as a percentage of GDP
          wbill_per_pub_expenditure = BI.WAG.TOTL.PB.ZS,) # Wage bill as a percentage of Public Expenditure
 
-### before we filter by year we check for imputation
-
-library("mice") # package used for imputation 
-md.pattern(wwbi_eu)
-
-
-
-wwbi_eu <- wwbi_eu[ ,c(1, 3,  6:23)] # selecting necessary columsn for imputation
-
-vis_miss(wwbi_eu)
-gg_miss_var(wwbi_eu, facet = year)
-gg_miss_var(wwbi_eu, facet = country)
+### Preparing data for imputation
+# this paper http://dx.doi.org/10.2139/ssrn.2996611 used mice with the pmm 
+# predictive mean matching model which mention is suitable for multivariate time series 
+# the process of imputation is the following: 
+# 1 sub-setting for each country 
+# 2 count how many observations are, the result will be used fill the argument m in the mice function
+# 3 get the imputed df with the function complete
+# 4 check the imputed df with vis_miss 
 
 
-mice:::find.collinear(Austria)
+wwbi_eu <- wwbi_eu[ ,c(1, 3,  6:23)] # selecting necessary columns for imputation
 
-Austria <- Austria[ ,-19]
+vis_miss(wwbi_eu) # explore missing values before imputation
+gg_miss_var(wwbi_eu, facet = year) # explore missing values by year
+gg_miss_var(wwbi_eu, facet = country) # explore missing values by country
 
-Austria <- wwbi_eu %>%  filter(country == "Austria") %>% droplevels()
-sum(is.na(Austria))
+Austria <- wwbi_eu %>%  # sub-setting for Austria 
+           filter(country == "Austria") %>% 
+           droplevels()
+prop_miss(Austria) # proportion of missing observations 20% 
+aut_m <- sum(is.na(Austria)) # getting the number of missing values 
 vis_miss(Austria)
-imp_aut <- mice(Austria, m= 76, method = "norm.boot")
-aut_impt <- complete(imp_aut)
-vis_miss(aut_impt)
+imp_aut <- mice(Austria, # impute Austria 
+                m= aut_m, # using the number of missing values in line 127
+                method = "pmm") # predictive mean matching method 
+aut_impt <- complete(imp_aut) # getting the imputed df 
+prop_miss(aut_impt) # proportion of missing observations 1.05% 
+vis_miss(aut_impt) # compare the visualization before imputation
 
-Belgium <- wwbi_eu %>%  filter(country == "2l.lmer") %>% droplevels()
+
+
+
+Belgium <- wwbi_eu %>%  filter(country == "Belgium") %>% droplevels()
 sum(is.na(Belgium))
 vis_miss(Belgium)
 imp_bel <- mice(Belgium, m= 75, method = "2l.lmer")
