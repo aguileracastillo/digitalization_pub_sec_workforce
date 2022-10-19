@@ -10,6 +10,8 @@ library(ggplot2)
 library(countrycode)
 library(here)
 library(mice)
+library(Amelia)
+library(imputeTS)
 
 #### Loading the excel files ####
 
@@ -73,15 +75,15 @@ wwbi_eu<- wwbi_eu[, c(2, 1, 95:97, 41,43,53,57,
                       13,3,8,15,6,7,93,94)] # this will select the variables we are interested in
 
 wwbi_eu <- droplevels(wwbi_eu) # dropping countries that still appaer as non EU countries
-wwbi_eu[, 1:5] <- lapply(wwbi_eu[1:5], as.factor ) # changing var type as factor
-wwbi_eu[, 6:23] <- lapply(wwbi_eu[6:23], as.numeric) # changing var type as numeric
+wwbi_eu[, 2:5] <- lapply(wwbi_eu[2:5], as.factor ) # changing var type as factor
+wwbi_eu[, c(1, 6:23)] <- lapply(wwbi_eu[c(1,6:23)], as.numeric) # changing var type as numeric
 
 # this long code renames the variables of our interest into a more readable description 
 
-var_cod_names <- wwbi %>% 
-                 distinct(`Indicator Name`, 
-                          `Indicator Code`) %>% 
-                 mutate(index = row_number()) %>% var_cod_names[, c(3, 1, 2)]
+# var_cod_names <- wwbi %>% # code in writing process 
+#                 distinct(`Indicator Name`, 
+#                          `Indicator Code`) %>% 
+#                 mutate(index = row_number()) %>% var_cod_names[, c(3, 1, 2)]
 
 
 wwbi_eu <- wwbi_eu %>% 
@@ -105,8 +107,9 @@ wwbi_eu <- wwbi_eu %>%
          wbill_per_pub_expenditure = BI.WAG.TOTL.PB.ZS,) # Wage bill as a percentage of Public Expenditure
 
 ### Preparing data for imputation
-# this paper http://dx.doi.org/10.2139/ssrn.2996611 used mice with the pmm 
-# predictive mean matching model which mention is suitable for multivariate time series 
+# this paper https://journal.r-project.org/archive/2017/RJ-2017-009/index.html used imputeTS 
+# with the spline https://en.wikipedia.org/wiki/Spline_interpolation 
+# this method  is suitable for multivariate time series imputation
 # the process of imputation is the following: 
 # 1 sub-setting for each country 
 # 2 count how many observations are, the result will be used fill the argument m in the mice function
@@ -114,175 +117,313 @@ wwbi_eu <- wwbi_eu %>%
 # 4 check the imputed df with vis_miss 
 
 
-wwbi_eu <- wwbi_eu[ ,c(1, 3,  6:23)] # selecting necessary columns for imputation
-
 vis_miss(wwbi_eu) # explore missing values before imputation
 gg_miss_var(wwbi_eu, facet = year) # explore missing values by year
 gg_miss_var(wwbi_eu, facet = country) # explore missing values by country
 
-Austria <- wwbi_eu %>%  # sub-setting for Austria 
-           filter(country == "Austria") %>% 
+
+#### Austria ####
+Austria <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+           filter(country == "Austria") %>% # sub-setting for Austria 
            droplevels()
+ggplot_na_distribution(Austria[3:20]) # plotting the data before imputing
 prop_miss(Austria) # proportion of missing observations 20% 
-aut_m <- sum(is.na(Austria)) # getting the number of missing values 
-vis_miss(Austria)
-imp_aut <- mice(Austria, # impute Austria 
-                m= aut_m, # using the number of missing values in line 127
-                method = "pmm") # predictive mean matching method 
-aut_impt <- complete(imp_aut) # getting the imputed df 
-prop_miss(aut_impt) # proportion of missing observations 1.05% 
+vis_miss(Austria) # visualize the na values before imputing
+aut_impt <- na_interpolation(Austria, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Austria[9], # choose a column index to plot from country with NA
+                      aut_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(aut_impt) # proportion of missing observations  
 vis_miss(aut_impt) # compare the visualization before imputation
 
+#### Belgium ####
+Belgium <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Belgium") %>% # sub-setting for Belgium 
+  droplevels()
+ggplot_na_distribution(Belgium[3:20]) # plotting the data before imputing
+prop_miss(Belgium) # proportion of missing observations 20% 
+vis_miss(Belgium) # visualize the na values before imputing
+bel_impt <- na_interpolation(Belgium, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Belgium[9], # choose a column index to plot from country with NA
+                      bel_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(bel_impt) # proportion of missing observations  
+vis_miss(bel_impt) # compare the visualization before imputation
+
+#### Bulgaria ####
+Bulgaria <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Bulgaria") %>% # sub-setting for Bulgaria 
+  droplevels()
+ggplot_na_distribution(Bulgaria[3:20]) # plotting the data before imputing
+prop_miss(Bulgaria) # proportion of missing observations 20% 
+vis_miss(Bulgaria) # visualize the na values before imputing
+bul_impt <- na_interpolation(Bulgaria, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Bulgaria[9], # choose a column index to plot from country with NA
+                      bul_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(bul_impt) # proportion of missing observations  
+vis_miss(bul_impt) # compare the visualization before imputation
+
+#### Croatia ####
+Croatia <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Croatia") %>% # sub-setting for Croatia 
+  droplevels()
+ggplot_na_distribution(Croatia[3:20]) # plotting the data before imputing
+prop_miss(Croatia) # proportion of missing observations 20% 
+vis_miss(Croatia) # visualize the na values before imputing
+cro_impt <- na_interpolation(Croatia, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Croatia[9], # choose a column index to plot from country with NA
+                      cro_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(cro_impt) # proportion of missing observations  
+vis_miss(cro_impt) # compare the visualization before imputation
+
+#### Cyprus ####
+Cyprus <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Cyprus") %>% # sub-setting for Cyprus 
+  droplevels()
+ggplot_na_distribution(Cyprus[3:20]) # plotting the data before imputing
+prop_miss(Cyprus) # proportion of missing observations 20% 
+vis_miss(Cyprus) # visualize the na values before imputing
+cyp_impt <- na_interpolation(Cyprus, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Cyprus[9], # choose a column index to plot from country with NA
+                      cyp_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(cyp_impt) # proportion of missing observations  
+vis_miss(cyp_impt) # compare the visualization before imputation
+
+#### Czech_R ####
+Czech_R <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Czech Republic") %>% # sub-setting for Czech_R 
+  droplevels()
+ggplot_na_distribution(Czech_R[3:20]) # plotting the data before imputing
+prop_miss(Czech_R) # proportion of missing observations 20% 
+vis_miss(Czech_R) # visualize the na values before imputing
+czech_impt <- na_interpolation(Czech_R, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Czech_R[9], # choose a column index to plot from country with NA
+                      czech_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(czech_impt) # proportion of missing observations  
+vis_miss(czech_impt) # compare the visualization before imputation
 
 
-
-Belgium <- wwbi_eu %>%  filter(country == "Belgium") %>% droplevels()
-sum(is.na(Belgium))
-vis_miss(Belgium)
-imp_bel <- mice(Belgium, m= 75, method = "2l.lmer")
-bel_impt <- complete(imp_bel)
-vis_miss(bel_impt)
-
-Bulgaria <- wwbi_eu %>%  filter(country == "Bulgaria") %>% droplevels()
-sum(is.na(Bulgaria))
-vis_miss(Bulgaria)
-imp_bul <- mice(Bulgaria, m= 129, method = "2l.lmer")
-colSums(is.na(Bulgaria))
-bul_impt <- complete(imp_bul)
-vis_miss(bul_impt)
-
-Croatia <- wwbi_eu %>%  filter(country == "Croatia") %>% droplevels()
-sum(is.na(Croatia))
-vis_miss(Croatia)
-imp_cro <- mice(Croatia, m= 183, method = "2l.lmer")
-cro_impt <- complete(imp_cro, 7)
-vis_miss(cro_impt)
-
-Cyprus <- wwbi_eu %>%  filter(country == "Cyprus") %>% droplevels()
-sum(is.na(Cyprus))
-vis_miss(Cyprus)
-imp_cyp <- mice(Cyprus, m= 90, method = "2l.lmer")
-cyp_impt <- complete(imp_cyp, 7)
-vis_miss(cyp_impt)
-
-Czech_R <- wwbi_eu %>%  filter(country == "Czech Republic") %>% droplevels()
-sum(is.na(Czech_R))
-vis_miss(Czech_R)
-imp_czech <- mice(Czech_R, m= 95, method = "2l.lmer")
-czech_impt <- complete(imp_czech, 7)
-vis_miss(czech_impt)
-
-Estonia <- wwbi_eu %>%  filter(country == "Estonia") %>% droplevels()
-sum(is.na(Estonia))
-vis_miss(Estonia)
-imp_esto <- mice(Estonia, m= 74, method = "2l.lmer")
-esto_impt <- complete(imp_esto, 7)
-vis_miss(esto_impt)
-
-Finland <- wwbi_eu %>%  filter(country == "Finland") %>% droplevels()
-vis_miss(Finland)
-sum(is.na(Finland))
-imp_finl <- mice(Finland, m= 198, method = "2l.lmer")
-finl_impt <- complete(imp_finl, 7)
-vis_miss(finl_impt)
-
-France <- wwbi_eu %>%  filter(country == "France") %>% droplevels()
-vis_miss(France)
-sum(is.na(France))
-imp_france <- mice(France, m= 80, method = "2l.lmer")
-france_impt <- complete(imp_france, 7)
-vis_miss(france_impt)
-
-Greece <- wwbi_eu %>%  filter(country == "Greece") %>% droplevels()
-vis_miss(Greece)
-sum(is.na(Greece))
-imp_greece <- mice(Greece, m= 126, method = "2l.lmer")
-greece_impt <- complete(imp_greece, 7)
-vis_miss(greece_impt)
-
-Hungary <- wwbi_eu %>%  filter(country == "Hungary") %>% droplevels()
-vis_miss(Hungary)
-sum(is.na(Hungary))
-imp_hung <- mice(Hungary, m= 88, method = "2l.lmer")
-hung_impt <- complete(imp_hung, 7)
-vis_miss(hung_impt)
-
-Iceland <- wwbi_eu %>%  filter(country == "Iceland") %>% droplevels()
-vis_miss(Iceland)
-sum(is.na(Iceland))
-imp_icel <- mice(Iceland, m= 164, method = "2l.lmer")
-icel_impt <- complete(imp_icel)
-vis_miss(icel_impt)
+#### Estonia ####
+Estonia <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Estonia") %>% # sub-setting for Estonia 
+  droplevels()
+ggplot_na_distribution(Estonia[3:20]) # plotting the data before imputing
+prop_miss(Estonia) # proportion of missing observations 20% 
+vis_miss(Estonia) # visualize the na values before imputing
+est_impt <- na_interpolation(Estonia, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Estonia[9], # choose a column index to plot from country with NA
+                      est_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(est_impt) # proportion of missing observations  
+vis_miss(est_impt) # compare the visualization before imputation
 
 
-Ireland <- wwbi_eu %>%  filter(country == "Ireland") %>% droplevels()
-vis_miss(Ireland)
-sum(is.na(Ireland))
-imp_irel <- mice(Ireland, m= 93, method = "2l.lmer")
-irel_impt <- complete(imp_irel)
-vis_miss(irel_impt)
-
-Lithuania <- wwbi_eu %>%  filter(country == "Lithuania") %>% droplevels()
-vis_miss(Lithuania)
-sum(is.na(Lithuania))
-imp_lith <- mice(Lithuania, m= 91, method = "2l.lmer")
-lith_impt <- complete(imp_lith)
-vis_miss(irel_lith)
-
-Luxembourg <- wwbi_eu %>%  filter(country == "Luxembourg") %>% droplevels()
-vis_miss(Luxembourg)
-sum(is.na(Luxembourg))
-imp_lux <- mice(Luxembourg, m= 80, method = "2l.lmer")
-lux_impt <- complete(imp_lux)
-vis_miss(lux_impt)
-
-Poland <- wwbi_eu %>%  filter(country == "Poland") %>% droplevels()
-vis_miss(Poland)
-sum(is.na(Poland))
-imp_pol <- mice(Poland, m= 70, method = "2l.lmer")
-pol_impt <- complete(imp_pol)
-vis_miss(pol_impt)
-
-Portugal <- wwbi_eu %>%  filter(country == "Portugal") %>% droplevels()
-vis_miss(Portugal)
-sum(is.na(Portugal))
-imp_port <- mice(Portugal, m= 126, method = "2l.lmer")
-port_impt <- complete(imp_port)
-vis_miss(port_impt)
-
-Romania <- wwbi_eu %>%  filter(country == "Romania") %>% droplevels()
-vis_miss(Romania)
-sum(is.na(Romania))
-imp_rom <- mice(Romania, m= 74, method = "2l.lmer")
-rom_impt <- complete(imp_rom)
-vis_miss(rom_impt)
-
-Slovakia <- wwbi_eu %>%  filter(country == "Slovak Republic") %>% droplevels()
-vis_miss(Slovakia)
-sum(is.na(Slovakia))
-imp_slov <- mice(Slovakia, m= 108, method = "2l.lmer")
-slov_impt <- complete(imp_slov)
-vis_miss(slov_impt)
+#### Finland ####
+Finland <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Finland") %>% # sub-setting for Finland 
+  droplevels()
+ggplot_na_distribution(Finland[3:20]) # plotting the data before imputing
+prop_miss(Finland) # proportion of missing observations 20% 
+vis_miss(Finland) # visualize the na values before imputing
+fin_impt <- na_interpolation(Finland, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Finland[9], # choose a column index to plot from country with NA
+                      fin_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(fin_impt) # proportion of missing observations  
+vis_miss(fin_impt) # compare the visualization before imputation
 
 
-Spain <- wwbi_eu %>%  filter(country == "Spain") %>% droplevels()
-vis_miss(Spain)
-sum(is.na(Spain))
-imp_spain <- mice(Spain, m= 109, method = "2l.lmer")
-spain_impt <- complete(imp_spain)
-vis_miss(spain_impt)
+#### France ####
+France <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "France") %>% # sub-setting for France 
+  droplevels()
+ggplot_na_distribution(France[3:20]) # plotting the data before imputing
+prop_miss(France) # proportion of missing observations 20% 
+vis_miss(France) # visualize the na values before imputing
+fra_impt <- na_interpolation(France, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(France[9], # choose a column index to plot from country with NA
+                      fra_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(fra_impt) # proportion of missing observations  
+vis_miss(fra_impt) # compare the visualization before imputation
 
+#### Greece ####
+Greece <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Greece") %>% # sub-setting for Greece 
+  droplevels()
+ggplot_na_distribution(Greece[3:20]) # plotting the data before imputing
+prop_miss(Greece) # proportion of missing observations 20% 
+vis_miss(Greece) # visualize the na values before imputing
+gre_impt <- na_interpolation(Greece, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Greece[9], # choose a column index to plot from country with NA
+                      gre_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(gre_impt) # proportion of missing observations  
+vis_miss(gre_impt) # compare the visualization before imputation
 
-UK <- wwbi_eu %>%  filter(country == "United Kingdom") %>% droplevels()
-sum(is.na(UK))
-imp_uk <- mice(UK, m= 119, method = "2l.lmer")
-uk_impt <- complete(imp_uk)
-vis_miss(uk_impt)
+#### Hungary ####
+Hungary <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Hungary") %>% # sub-setting for Hungary 
+  droplevels()
+ggplot_na_distribution(Hungary[3:20]) # plotting the data before imputing
+prop_miss(Hungary) # proportion of missing observations 20% 
+vis_miss(Hungary) # visualize the na values before imputing
+hun_impt <- na_interpolation(Hungary, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Hungary[9], # choose a column index to plot from country with NA
+                      hun_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(hun_impt) # proportion of missing observations  
+vis_miss(hun_impt) # compare the visualization before imputation
+
+#### Iceland ####
+Iceland <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Iceland") %>% # sub-setting for Iceland 
+  droplevels()
+ggplot_na_distribution(Iceland[3:20]) # plotting the data before imputing
+prop_miss(Iceland) # proportion of missing observations 20% 
+vis_miss(Iceland) # visualize the na values before imputing
+ice_impt <- na_interpolation(Iceland, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Iceland[9], # choose a column index to plot from country with NA
+                      ice_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(ice_impt) # proportion of missing observations  
+vis_miss(ice_impt) # compare the visualization before imputation
+
+#### Ireland ####
+Ireland <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Ireland") %>% # sub-setting for Ireland 
+  droplevels()
+ggplot_na_distribution(Ireland[3:20]) # plotting the data before imputing
+prop_miss(Ireland) # proportion of missing observations 20% 
+vis_miss(Ireland) # visualize the na values before imputing
+ire_impt <- na_interpolation(Ireland, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Ireland[9], # choose a column index to plot from country with NA
+                      ire_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(ire_impt) # proportion of missing observations  
+vis_miss(ire_impt) # compare the visualization before imputation
+
+#### Lithuania ####
+Lithuania <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Lithuania") %>% # sub-setting for Lithuania 
+  droplevels()
+ggplot_na_distribution(Lithuania[3:20]) # plotting the data before imputing
+prop_miss(Lithuania) # proportion of missing observations 20% 
+vis_miss(Lithuania) # visualize the na values before imputing
+lit_impt <- na_interpolation(Lithuania, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Lithuania[9], # choose a column index to plot from country with NA
+                      lit_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(lit_impt) # proportion of missing observations  
+vis_miss(lit_impt) # compare the visualization before imputation
+
+#### Luxembourg ####
+Luxembourg <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Luxembourg") %>% # sub-setting for Luxembourg 
+  droplevels()
+ggplot_na_distribution(Luxembourg[3:20]) # plotting the data before imputing
+prop_miss(Luxembourg) # proportion of missing observations 20% 
+vis_miss(Luxembourg) # visualize the na values before imputing
+lux_impt <- na_interpolation(Luxembourg, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Luxembourg[9], # choose a column index to plot from country with NA
+                      lux_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(lux_impt) # proportion of missing observations  
+vis_miss(lux_impt) # compare the visualization before imputation
+
+#### Poland ####
+Poland <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Poland") %>% # sub-setting for Poland 
+  droplevels()
+ggplot_na_distribution(Poland[3:20]) # plotting the data before imputing
+prop_miss(Poland) # proportion of missing observations 20% 
+vis_miss(Poland) # visualize the na values before imputing
+pol_impt <- na_interpolation(Poland, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Poland[9], # choose a column index to plot from country with NA
+                      pol_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(pol_impt) # proportion of missing observations  
+vis_miss(pol_impt) # compare the visualization before imputation
+
+#### Portugal ####
+Portugal <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Portugal") %>% # sub-setting for Portugal 
+  droplevels()
+ggplot_na_distribution(Portugal[3:20]) # plotting the data before imputing
+prop_miss(Portugal) # proportion of missing observations 20% 
+vis_miss(Portugal) # visualize the na values before imputing
+por_impt <- na_interpolation(Portugal, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Portugal[9], # choose a column index to plot from country with NA
+                      por_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(por_impt) # proportion of missing observations  
+vis_miss(por_impt) # compare the visualization before imputation
+
+#### Romania ####
+Romania <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Romania") %>% # sub-setting for Romania 
+  droplevels()
+ggplot_na_distribution(Romania[3:20]) # plotting the data before imputing
+prop_miss(Romania) # proportion of missing observations 20% 
+vis_miss(Romania) # visualize the na values before imputing
+rom_impt <- na_interpolation(Romania, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Romania[9], # choose a column index to plot from country with NA
+                      rom_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(rom_impt) # proportion of missing observations  
+vis_miss(rom_impt) # compare the visualization before imputation
+
+#### Slovakia ####
+Slovakia <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Slovak Republic") %>% # sub-setting for Slovakia 
+  droplevels()
+ggplot_na_distribution(Slovakia[3:20]) # plotting the data before imputing
+prop_miss(Slovakia) # proportion of missing observations 20% 
+vis_miss(Slovakia) # visualize the na values before imputing
+slk_impt <- na_interpolation(Slovakia, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Slovakia[9], # choose a column index to plot from country with NA
+                      slk_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(slk_impt) # proportion of missing observations  
+vis_miss(slk_impt) # compare the visualization before imputation
+
+#### Spain ####
+Spain <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "Spain") %>% # sub-setting for Spain 
+  droplevels()
+ggplot_na_distribution(Spain[3:20]) # plotting the data before imputing
+prop_miss(Spain) # proportion of missing observations 20% 
+vis_miss(Spain) # visualize the na values before imputing
+spn_impt <- na_interpolation(Spain, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(Spain[9], # choose a column index to plot from country with NA
+                      spn_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(spn_impt) # proportion of missing observations  
+vis_miss(spn_impt) # compare the visualization before imputation
+
+#### UK ####
+UK <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
+  filter(country == "United Kingdom") %>% # sub-setting for UK 
+  droplevels()
+ggplot_na_distribution(UK[3:20]) # plotting the data before imputing
+prop_miss(UK) # proportion of missing observations 20% 
+vis_miss(UK) # visualize the na values before imputing
+uk_impt <- na_interpolation(UK, 
+                             option = "spline") # impute function from imputeTS
+ggplot_na_imputations(UK[9], # choose a column index to plot from country with NA
+                      uk_impt[9]) # # choose a column index to plot from imputed country
+prop_miss(uk_impt) # proportion of missing observations  
+vis_miss(uk_impt) # compare the visualization before imputation
 
 df_list <- list(aut_impt, bel_impt, bul_impt, cro_impt, cyp_impt, czech_impt, 
-                esto_impt, finl_impt, france_impt, greece_impt, hung_impt, icel_impt,
-                irel_impt, lith_impt, lux_impt, pol_impt, port_impt, rom_impt, slov_impt,
-                spain_impt, uk_impt)
+                est_impt, fin_impt, fra_impt, gre_impt, hun_impt, ice_impt,
+                ire_impt, lit_impt, lux_impt, pol_impt, por_impt, rom_impt, slk_impt,
+                spn_impt, uk_impt)
+
 Italy <- wwbi_eu %>%  filter(country == "Italy") %>% droplevels()
 Latvia <- wwbi_eu %>%  filter(country == "Latvia") %>% droplevels()
 Switzerland <- wwbi_eu %>%  filter(country == "Switzerland") %>% droplevels()
