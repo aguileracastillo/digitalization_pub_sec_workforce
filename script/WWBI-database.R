@@ -13,7 +13,7 @@ library(mice)
 library(Amelia)
 library(imputeTS)
 
-#### Loading the excel files ####
+#### Loading the excel files and change var types ####
 
 wwbi <- read_excel(here("Data", 
                         "Raw", 
@@ -53,12 +53,11 @@ eu_member <- eu_regions[ , c(1 ,2, 6, 7)] %>% # selecting only needed columns
 wwbi[, 1:2] <- lapply(wwbi[1:2], as.factor ) # change column 1:2 as factor 
 wwbi[, 5:23] <- lapply(wwbi[5:23], as.numeric) # change columns 5:23 as numeric 
 
-#### Exploring your data ####
 
 glimpse(wwbi) # wwbi checking the variable type in the wwbi df
 colnames(wwbi) # looking at colnames we need to change from wide to long format
 
-### Cleaning data ####
+### Cleaning and Reshaping data ####
 
 ## the df wwbi needs to be reshape usually year 
 ## are in one column and variables in different columns
@@ -79,12 +78,6 @@ wwbi_eu[, 2:5] <- lapply(wwbi_eu[2:5], as.factor ) # changing var type as factor
 wwbi_eu[, c(1, 6:23)] <- lapply(wwbi_eu[c(1,6:23)], as.numeric) # changing var type as numeric
 
 # this long code renames the variables of our interest into a more readable description 
-
-# var_cod_names <- wwbi %>% # code in writing process 
-#                 distinct(`Indicator Name`, 
-#                          `Indicator Code`) %>% 
-#                 mutate(index = row_number()) %>% var_cod_names[, c(3, 1, 2)]
-
 
 wwbi_eu <- wwbi_eu %>% 
   rename(fpu_em_clerks = BI.PWK.PUBS.CK.FE.ZS, # Females as a share of public paid employees
