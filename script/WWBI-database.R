@@ -12,6 +12,17 @@ library(here)
 library(mice)
 library(Amelia)
 library(imputeTS)
+library(data.table)
+
+#### CONTEXT OF THE DATA #####
+# The data used in this script is the World Wide Bureaucracy indicator that filters
+# only the chosen variables. The WWBI has missing values 
+# in which some countries needed imputation treatment. The imputation was made
+# using the "imputeTS" package imputations for time series, after applying imputation
+# the result is the "wwwbi_impt_df.csv" which contains ONLY the wwbi indicators
+# for EU countries. The "wwwbi_impt_df.csv" file will be used in the script master_df
+# to merge the wwbi with the other databases such as oecd. 
+
 
 #### Loading the excel files and change var types ####
 
@@ -412,241 +423,50 @@ ggplot_na_imputations(UK[9], # choose a column index to plot from country with N
 prop_miss(uk_impt) # proportion of missing observations  
 vis_miss(uk_impt) # compare the visualization before imputation
 
-df_list <- list(aut_impt, bel_impt, bul_impt, cro_impt, cyp_impt, czech_impt, 
-                est_impt, fin_impt, fra_impt, gre_impt, hun_impt, ice_impt,
-                ire_impt, lit_impt, lux_impt, pol_impt, por_impt, rom_impt, slk_impt,
-                spn_impt, uk_impt)
+#### Not included countries ####
 
 Italy <- wwbi_eu %>%  filter(country == "Italy") %>% droplevels()
+ggplot_na_distribution(Italy[6:20]) # plotting the data before imputing
+prop_miss(Italy) # proportion of missing observations  
+vis_miss(Italy) # visualize the na values before imputing
+
 Latvia <- wwbi_eu %>%  filter(country == "Latvia") %>% droplevels()
+ggplot_na_distribution(Latvia[6:20]) # plotting the data before imputing
+prop_miss(Latvia) # proportion of missing observations  
+vis_miss(Latvia) # visualize the na values before imputing
+
 Switzerland <- wwbi_eu %>%  filter(country == "Switzerland") %>% droplevels()
-
-dfs_list <- list( Switzerland , wwbi_impt_df)
-
-wwbi_impt_df <- rbindlist(dfs_list, use.names =  TRUE)
-
-library(data.table)
-wwbi_impt_df <- rbindlist(df_list, use.names = TRUE)
-wwbi_impt_df <- wwbi_impt_df %>%  filter(year %in% c(2008,2010,2012,2014,2016,2018)) %>% 
-  droplevels()
-vis_miss(wwbi_impt_df)
-nlevels(wwbi_impt_df$country)
-levels(wwbi_impt_df$country)
-wwbi_impt_df <- read_csv("wwbi_impt_df.csv")
-##wwbi_impt_df <- wwbi_impt_df[-c(49:54), -1]
-wwbi_impt_df <- wwbi_impt_df[, -1]
-wwbi_impt_df[, 1:6] <- lapply(wwbi_impt_df[1:6], as.factor )
-gg_miss_var(wwbi_impt_df, facet = year)
-gg_miss_var(wwbi_impt_df, facet = country)
-str(wwbi_impt_df)
-vis_dat(wwbi_impt_df)
-vis_miss(wwbi_impt_df)
-
-write.csv(wwbi_impt_df, file = "wwbi_impt_df.csv")
-
-
-wwbi_eu <- wwbi_eu %>%  filter(year %in% c(2008,2010,2012,2014,2016,2018)) %>% droplevels()
-str(wwbi_eu)
-wwbi_eu <- full_join(wwbi_eu, eu_sample, by = "country_code")
-wwbi_eu <- droplevels(wwbi_eu)
-wwbi_eu <- wwbi_eu[ ,c(2, 1, 24, 21:23, 3:20)] 
-wwbi_eu[, 1:2] <- lapply(wwbi_eu[1:2], as.factor ) 
-wwbi_eu[, 7:24] <- lapply(wwbi_eu[7:24], as.numeric)
-
-str(wwbi_eu)
-vis_dat(wwbi_eu)
-vis_miss(wwbi_eu)
-prop_miss(wwbi_eu)
-gg_miss_var(wwbi_eu, facet = year)
-gg_miss_var(wwbi_eu, facet = country)
-summary(wwbi_eu)
-write.csv(wwbi_eu, file = "wwbi_eu.csv")
-
-clerk <- wwbi1 %>% filter(ind_code == "BI.PWK.PUBS.CK.FE.ZS")
-
-setdiff(wwbi_eu$country, ec_frin$country)
-
-
-
-
-## Merging the data by country code (Region and Income Group)
-## First create a subset of wwbicountry only keeping Country Code, Region, Income Group with the subindex
-## of the columns we are keeping
-
-countries_info<- countries_info[, c(2, 1,  3, 4)]
-
-## Then we merge wwbi1 and wwbicountry1 by Country Code using full_join function
-
-wwbi2<- full_join(wwbi1, countries_info, by = "country")
-
-
-
-## Changing class of some variables because all the variables are as characters and we have to identify
-## some categorical variables and convert it as factor 
-
-wwbi2 <- wwbi2[ , c(1:5, 7, 8, 6)]
-str(wwbi2)
-
-wwbi2[, 1:7] <- lapply(wwbi2[1:7], as.factor )
-wwbi2$value<- as.numeric(wwbi2$value)
-#format(wwbi2$value, scientific = FALSE)
-
-
-## Now we are gonna spread the database converting the column Indicator Code in variables 
-
-## First, we need to create a subset with the indicators
-indicators <- as.data.frame( colnames(wwbi2))
-indicators<- unique(indicators)
-
-## Second, I need to delete indicator name column from the dataframe we are going to keep indicator codes
-## as variables 
-wwbi3<- wwbi2[ ,-3]
-
-## now we spread the dataframe
-
-wwbi4<- spread(wwbi3, "ind_code", "value")
-
-#### Variables of Interest ####
-# By Occupational Level # Female is known then Male = (1 paid - Female)
-
-# Females as a share of public paid employees by occupation (Clerks)
-# BI.PWK.PUBS.CK.FE.ZS
-# Females as a share of public paid employees by occupation (Elementary occupation)
-# BI.PWK.PUBS.EO.FE.ZS
-# Females as a share of public paid employees by occupation (Professionals)
-# BI.PWK.PUBS.PN.FE.ZS
-# Females as a share of public paid employees by occupation (Senior officials)
-# BI.PWK.PUBS.SN.FE.ZS
-# Females as a share of public paid employees by occupation (Technicians)
-# BI.PWK.PUBS.TN.FE.ZS
-
-#Females, as a share of public paid employees
-# BI.PWK.PUBS.FE.ZS
-
-#### By education level #### Has this changed over time??? 
-# Individuals with no education as a share of public paid employees
-# BI.PWK.PUBS.NN.ZS 
-# Individuals with primary education as a share of public paid employees
-# BI.PWK.PUBS.PR.ZS 
-# Individuals with secondary education as a share of public paid employees
-# BI.PWK.PUBS.SG.ZS 
-# Individuals with tertiary education as a share of public paid employees
-# BI.PWK.PUBS.TT.ZS 
-# Proportion of total employees with tertiary education working in public sector
-# BI.EMP.TOTL.PB.TT.ZS
-
-#### Type of Employment ####
-# Public sector employment as a share of formal employment
-# BI.EMP.FRML.PB.ZS 
-# Public sector employment as a share of paid employment
-# BI.EMP.PWRK.PB.ZS 
-# Public sector employment as a share of total employment
-# BI.EMP.TOTL.PB.ZS 
-
-#### URBAN / RURAL ####
-# Public sector employment as a share of paid employment by location (Rural)
-# BI.EMP.PWRK.PB.RU.ZS 
-# Public sector employment as a share of paid employment by location (Urban)
-# BI.EMP.PWRK.PB.UR.ZS 
-
-#### WAGE BILL #### 
-#Wage bill as a percentage of GDP
-# BI.WAG.TOTL.GD.ZS
-# Wage bill as a percentage of Public Expenditure
-# BI.WAG.TOTL.PB.ZS
-
-#### Shaping the df wwbi4 with the indicators of interest ####
-
-
-
-### Write the column index for the chosen indicators 
-wwbi5<- wwbi4[, c(1,2,3,4,5,6,9,10,11,16,18,44,46,52,54,56,57,59,60,62,63,96,97)]
-wwbi5<- wwbi4[, c(1,2,3,4,5,44,46,56,60,62,52,54,57,59,63,16,6,11,18,9,10,96,97)]
-
-wwbi5 <- wwbi5 %>%  filter(year %in% c(2008,2010,2012,2014,2016,2018)) %>% droplevels()
-#no <- wwbi5 %>% filter(country_code == "GBR")
-
-## missing values with naniar
-
-# entire df
-vis_dat(wwbi5)
-vis_miss(wwbi5)
-prop_miss(wwbi5)
-miss_wwbi5<- miss_var_summary(wwbi5)
-
-# for Europe
-
-wwbi6 <- wwbi5[ , -c(2:4)]
-wwbi_eu <- full_join(wwbi6, eu_sample, by = "country_code")
-wwbi_eu <- wwbi_eu[ ,c(1, 21, 2, 24, 22, 23, 3:20)] 
-wwbi_eu<-  wwbi_eu %>%  filter(eu_member != "NA") %>% droplevels()
-str(wwbi_eu)
-summary(wwbi_eu)
-write.csv(wwbi_eu, file = "wwbi_eu.csv")
-
-
-
-
-
-ggplot(europe, aes( x= year , y= BI.PWK.PUBS.TN.FE.ZS )) + geom_miss_point() + facet_wrap(~country_name)
-ggplot(europe, aes( x= year , y= BI.PWK.PUBS.CK.FE.ZS )) + geom_miss_point() + facet_wrap(~country_name)
-
-gg_miss_var(europe, facet = year)
-
-Estonia<- europe %>% filter(`Country Name`== "Estonia")
-Estonia<- Estonia[-c(1:4), ]
-ggplot(Estonia, aes(x = year)) + geom_line (aes (y= BI.PWK.PUBS.TN.FE.ZS,  color = "darkred")) +
-  geom_line(aes (y= BI.PWK.PUBS.CK.FE.ZS,  color="steelblue"))
-
-ggplot() + 
-  geom_point(data = Estonia, aes(x = year, y = BI.PWK.PUBS.TN.FE.ZS), color = "blue") +
-  geom_point(data = Estonia, aes(x = year, y = BI.PWK.PUBS.CK.FE.ZS), color = "red") +
-  geom_point(data = Estonia, aes(x = year, y = BI.PWK.PUBS.PN.FE.ZS), color = "black")
-
-## Public sector employment as a share of paid employment
-# BI.EMP.PWRK.PB.ZS 
-# Public sector employment as a share of total employment
-# BI.EMP.TOTL.PB.ZS 
-
-ggplot(europe, aes( x= year , y= BI.EMP.PWRK.PB.ZS )) + geom_miss_point() + facet_wrap(~`Country Name`)
-ggplot(europe, aes( x= year , y= BI.EMP.TOTL.PB.ZS )) + geom_miss_point() + facet_wrap(~`Country Name`)
-
-
-
-## split by regions in europe
-
-
-
-
-#### for latam ####
-str(latam)
-vis_dat(latam)
-vis_miss(latam)
-prop_miss(latam)
-miss_latam<- miss_var_summary(latam)
-ggplot(latam, aes( x= year , y= BI.PWK.PUBS.TN.FE.ZS )) + geom_miss_point() + facet_wrap(~`Country Name`)
-ggplot(latam, aes( x= year , y= BI.PWK.PUBS.CK.FE.ZS )) + geom_miss_point() + facet_wrap(~`Country Name`)
-gg_miss_var(latam, facet = year)
-
-
-####  Panel Data exploration ####
-
-wwbi_panel<- wwbi5[, -c(3, 5)]
-write.csv(wwbi_panel, file = "wwbi_panel.csv")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ggplot_na_distribution(Switzerland[6:20]) # plotting the data before imputing
+prop_miss(Switzerland) # proportion of missing observations  
+vis_miss(Switzerland) # visualize the na values before imputing
+
+#### Binding all countries to create the imputed df #####
+
+df_list <- list(aut_impt, bel_impt, bul_impt, # here we create a data frame list 
+                cro_impt, cyp_impt, czech_impt, # with the imputations results 
+                est_impt, fin_impt, fra_impt, # this list will be used to create 
+                gre_impt, hun_impt, ice_impt, # the imputed data frame
+                ire_impt, lit_impt, lux_impt, 
+                pol_impt, por_impt, rom_impt, 
+                slk_impt,spn_impt, uk_impt)
+
+
+wwbi_impt_df <- rbindlist(df_list, # binding all the imputed countries 
+                          use.names = TRUE) # creates the imputed df
+
+wwbi_impt_df <- wwbi_impt_df %>%  
+                filter(year %in% # filtering by years of our interest
+                         c(2008,2010,2012,
+                           2014,2016,2018)) %>% 
+                droplevels() # dropping levels 
+
+vis_miss(wwbi_impt_df) # visualize imputed df
+nlevels(wwbi_impt_df$country) # check the number of countries in the df
+levels(wwbi_impt_df$country) # check the countries in the df
+
+write.csv(wwbi_impt_df, # exporting the "wwbi_impt_df" 
+          file = here("Data", 
+                      "Processed", # to processed data
+                      "wwbi_impt_df.csv")) # with this name
 
 
