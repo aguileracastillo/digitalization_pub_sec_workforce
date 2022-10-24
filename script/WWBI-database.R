@@ -383,7 +383,7 @@ vis_miss(rom_impt) # compare the visualization before imputation
 
 #### Slovakia ####
 Slovakia <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  # choosing the year country (1,3) and numeric vars (6:23)
-  filter(country == "Slovak Republic") %>% # sub-setting for Slovakia 
+            filter(country == "Slovak Republic") %>% # sub-setting for Slovakia 
   droplevels()
 ggplot_na_distribution(Slovakia[3:20]) # plotting the data before imputing
 prop_miss(Slovakia) # proportion of missing observations  
@@ -425,17 +425,20 @@ vis_miss(uk_impt) # compare the visualization before imputation
 
 #### Not included countries ####
 
-Italy <- wwbi_eu %>%  filter(country == "Italy") %>% droplevels()
+Italy <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  
+  filter(country == "Italy") %>% droplevels()
 ggplot_na_distribution(Italy[6:20]) # plotting the data before imputing
 prop_miss(Italy) # proportion of missing observations  
 vis_miss(Italy) # visualize the na values before imputing
 
-Latvia <- wwbi_eu %>%  filter(country == "Latvia") %>% droplevels()
+Latvia <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  
+  filter(country == "Latvia") %>% droplevels()
 ggplot_na_distribution(Latvia[6:20]) # plotting the data before imputing
 prop_miss(Latvia) # proportion of missing observations  
 vis_miss(Latvia) # visualize the na values before imputing
 
-Switzerland <- wwbi_eu %>%  filter(country == "Switzerland") %>% droplevels()
+Switzerland <- wwbi_eu[ ,c(1, 3,  6:23)] %>%  
+  filter(country == "Switzerland") %>% droplevels()
 ggplot_na_distribution(Switzerland[6:20]) # plotting the data before imputing
 prop_miss(Switzerland) # proportion of missing observations  
 vis_miss(Switzerland) # visualize the na values before imputing
@@ -448,7 +451,8 @@ df_list <- list(aut_impt, bel_impt, bul_impt, # here we create a data frame list
                 gre_impt, hun_impt, ice_impt, # the imputed data frame
                 ire_impt, lit_impt, lux_impt, 
                 pol_impt, por_impt, rom_impt, 
-                slk_impt,spn_impt, uk_impt)
+                slk_impt,spn_impt, uk_impt,
+                Italy, Latvia, Switzerland)
 
 
 wwbi_impt_df <- rbindlist(df_list, # binding all the imputed countries 
@@ -463,6 +467,11 @@ wwbi_impt_df <- wwbi_impt_df %>%
 vis_miss(wwbi_impt_df) # visualize imputed df
 nlevels(wwbi_impt_df$country) # check the number of countries in the df
 levels(wwbi_impt_df$country) # check the countries in the df
+
+wwbi_impt_df <- inner_join(wwbi_impt_df, 
+                           eu_member[, c(1,2)], 
+                           by = "country") # adding the country code for joining wit other df
+wwbi_impt_df <- wwbi_impt_df[, c(1,2 ,21, 3:20 )] # arranging the columns 
 
 write.csv(wwbi_impt_df, # exporting the "wwbi_impt_df" 
           file = here("Data", 
