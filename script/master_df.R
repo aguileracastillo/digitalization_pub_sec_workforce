@@ -10,9 +10,14 @@ library(ggplot2)
 library(here)
 
 #### CONTEXT OF THE DATA #####
+# This script aims to join the imputed data set wwbi with the other data sets 
+# to create one master data set that will be used to run the econometric models
+# the final data set is not standardized or normalized. Note that the variable
+# no_ed_sppaid_em has empty observations so it is better not to use this variable
+# in the econometric model.
 
 
-#### Load WWBI imputed data frame ####
+#### WWBI imputed data frame ####
 im_wwbi <- read_csv(here("Data", # load the WWBI imputed data frame
                       "Processed", 
                       "wwbi_impt_df.csv")) # from the script "WWBI-database.r"
