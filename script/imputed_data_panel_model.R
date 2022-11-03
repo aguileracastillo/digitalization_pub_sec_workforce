@@ -13,18 +13,16 @@ library(caret)
 library(gplots)
 
 
-### Master df ####
+### Loading the imputed master df ####
 
-directory <- setwd("C:/Users/eagle/Dropbox/Shared_Lucho/Dissertation_Models/Data/RawSources/Clean DF - R/Imputed_master_df")
-###directory <- setwd("C:/Users/Andres/Dropbox/Shared_Lucho/Dissertation_Models/Data/RawSources/Clean DF - R")
-
-imp_master_df <- read_csv("imp_master_df.csv") # 27 countries - Worldwide Bureaucracy Indicators version 18 indicators
+imp_master_df <- read_csv(here("Data", 
+                               "Processed", 
+                               "imp_master_df.csv")) # load the data imputed data frame
 imp_master_df <- imp_master_df[, -1]
+imp_master_df[, 1:3] <- lapply(imp_master_df[1:3], 
+                               as.factor) # change data type to factor columns 1 to 3
 
-
-
-imp_master_df[, 1:6] <- lapply(imp_master_df[1:6], as.factor )
-imp_master_df <- imp_master_df[, -c(3, 6)]
+# Visualize the imputed data frame 
 str(imp_master_df)
 summary(imp_master_df)
 vis_dat(imp_master_df)
@@ -34,33 +32,63 @@ gg_miss_var(imp_master_df, facet = year)
 gg_miss_var(imp_master_df, facet = country)
 
 
-#### plots ####
-ggplot(imp_master_df, aes(x= fpu_em_professional, y= egov_index, color=region, shape=eu_member)) +
-  geom_point() + 
-  geom_smooth(method=lm) + facet_wrap(~country)
+#### Scatter plots with trend line to see variable relationships by country ####
+ggplot(imp_master_df, 
+       aes(x= fpu_em_professional, # Females as a share of public paid employees  (Professionals)
+           y= egov_index)) + # e-government index
+  geom_point() + # scatter plot
+  geom_smooth(method=lm) + # trend line 
+  facet_wrap(~country) # by country
 
-ggplot(imp_master_df, aes(x= online_ser_index , y=  fpu_em_clerks)) + geom_point() + 
-  geom_smooth(method=lm)  + facet_wrap(~country)
+ggplot(imp_master_df, 
+       aes(x= online_ser_index , # online service index
+           y=  fpu_em_clerks)) + # Females as a share of public paid employees  (Clreks)
+  geom_point() + # scatter plot
+  geom_smooth(method=lm)  + # trend line
+  facet_wrap(~country) # by country
 
-ggplot(imp_master_df, aes(x= online_ser_index , y=  fpu_em_technician)) + geom_point() + 
-  geom_smooth(method=lm)  + facet_wrap(~country)
+ggplot(imp_master_df, 
+       aes(x= online_ser_index ,# online service index
+           y=  fpu_em_technician)) + # Females as a share of public paid employees  (Technician)
+  geom_point() + # scatter plot
+  geom_smooth(method=lm)  + # trend line
+  facet_wrap(~country) # by country
 
-ggplot(imp_master_df, aes(x= online_ser_index , y=  fpu_em_professional)) + geom_point() + 
-  geom_smooth(method=lm)  + facet_wrap(~country)
+ggplot(imp_master_df, 
+       aes(x= online_ser_index , # online service index
+           y=  fpu_em_professional)) + # Females as a share of public paid employees  (Professional)
+  geom_point() + # scatter plot
+  geom_smooth(method=lm)  + # trend line
+  facet_wrap(~country) # by country
 
-ggplot(imp_master_df, aes(x= egov_index , y=  psec_stotal_em)) + geom_point() + 
-  geom_smooth(method=lm)  + facet_wrap(~country)
+ggplot(imp_master_df, 
+       aes(x= egov_index , # e-government index
+           y=  psec_stotal_em)) + # Public sector employment as share of total employment
+  geom_point() + # scatter plot
+  geom_smooth(method=lm)  + # trend line
+  facet_wrap(~country) # by country
 
-ggplot(imp_master_df, aes(x= online_ser_index , y=  wbill_per_gdp)) + geom_point() + 
-  geom_smooth(method=lm)  + facet_wrap(~country)
+ggplot(imp_master_df, 
+       aes(x= online_ser_index , # online service index
+           y=  wbill_per_gdp)) + # Wage bill as a percent of GDP
+  geom_point() + # scatter plot
+  geom_smooth(method=lm)  + # trend line
+  facet_wrap(~country) # by country
 
-#### Panel data Analysis before normalizing####
-## converting our data into panel data with plm function
-panel_data <- pdata.frame(imp_master_df, index = c("country", "year"))
+#### Panel data Analysis without normalizing####
+# This is a test to see how the model behaves without normalizing the variables
+
+panel_data <- pdata.frame(imp_master_df, # converting our data into panel data with plm function
+                          index = c("country", # individuals 
+                                    "year")) # time 
 
 
 
-fe1 <- plm(psec_stotal_em ~ online_ser_index + log(gdp_percap) + cofog_ggtot , data = panel_data, p.model= "within")
+fe1 <- plm(psec_stotal_em ~ online_ser_index + 
+             log(gdp_percap) + cofog_ggtot , 
+           data = panel_data, 
+           p.model= "within")
+
 colnames(imp_master_df)
 stargazer(fe1, type = "text")
 summary(fe1)

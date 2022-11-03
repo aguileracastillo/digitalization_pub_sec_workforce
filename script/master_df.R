@@ -122,7 +122,7 @@ imp_master_df <- inner_join(im_wwbi, # the "im_wwbi" has 18 variables
               filter(country_code %in% c("AUT", "BEL", "CZE",  "EST", "ESP",
                                          "FIN", "FRA", "GRC", "HUN", 
                                          "IRL", "ITA", "LTU", "LUX", 
-                                         "LVA", "POL", "PRT")) # filtering for 16 European coutnries
+                                         "LVA", "POL", "PRT")) # filtering for 16 European countries
   
 str(imp_master_df)
 summary(imp_master_df)
