@@ -14,7 +14,11 @@ library(here)
 # to create one master data set that will be used to run the econometric models
 # the final data set is not standardized or normalized. Note that the variable
 # no_ed_sppaid_em has empty observations so it is better not to use this variable
-# in the econometric model.
+# in the econometric model. At the end of the code you will find the master data frame
+# including the only 16 countries (Austria, Belgium, Czech Republic, Estonia, Finland, 
+# France, Greece, Hungary, Ireland, Italy, Latvia, Lithuania, Luxembourg, Poland, 
+# Portugal, and Spain). Other countries such Germany, Norway etc were excluded 
+# due to the amount of missing values within different indicators.
 
 
 #### WWBI imputed data frame ####
@@ -114,10 +118,12 @@ imp_master_df <- inner_join(im_wwbi, # the "im_wwbi" has 18 variables
                         by = c("country_code", 
                                "year")) %>% 
               droplevels() %>% 
-              replace_with_na_all(condition = ~.x == 0.0000000000)
+              replace_with_na_all(condition = ~.x == 0.0000000000) %>% # replacing 0s with NA
+              filter(country_code %in% c("AUT", "BEL", "CZE",  "EST", "ESP",
+                                         "FIN", "FRA", "GRC", "HUN", 
+                                         "IRL", "ITA", "LTU", "LUX", 
+                                         "LVA", "POL", "PRT")) # filtering for 16 European coutnries
   
-
-
 str(imp_master_df)
 summary(imp_master_df)
 vis_dat(imp_master_df)
@@ -126,34 +132,15 @@ prop_miss(master_df)
 gg_miss_var(imp_master_df, facet = year)
 gg_miss_var(imp_master_df, facet = country)
 
-write.csv(imp_master_df, file = here("Data", "Processed", "imp_master_df.csv"))
+write.csv(imp_master_df, # Saving the imputed master df with 96 observations & 16 countries
+          file = here("Data", 
+                      "Processed", 
+                      "imp_master_df.csv")) 
 
 
 
-levels(master_df$country_code)
-master_df1 <- master_df %>% 
-  filter(country_code %in% c("DEU", "NOR","DNK")) %>% droplevels() 
-gg_miss_var(master_df1, facet = country)
 
 
-master_df1 <- master_df %>% 
-  filter(country_code !=  "BGR" & 
-           country_code !=  "HRV" & 
-           country_code !=  "CYP" & 
-           country_code !=  "ROU" &
-           country_code != "GBR" &
-           country_code != "SVK" &
-           country_code != "ISL" &
-           country_code != "DEU" &
-           country_code != "NOR"&
-           country_code != "SVN" &
-           country_code != "DNK" ) %>% droplevels() 
-str(master_df1)
-summary(master_df1)
-gg_miss_var(master_df1, facet = country)
-str(master_df1)
-vis_dat(master_df1)
-vis_miss(master_df1)
-prop_miss(master_df1)
 
 
+         

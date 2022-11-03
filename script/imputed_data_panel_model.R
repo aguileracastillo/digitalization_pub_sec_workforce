@@ -17,6 +17,7 @@ library(gplots)
 
 directory <- setwd("C:/Users/eagle/Dropbox/Shared_Lucho/Dissertation_Models/Data/RawSources/Clean DF - R/Imputed_master_df")
 ###directory <- setwd("C:/Users/Andres/Dropbox/Shared_Lucho/Dissertation_Models/Data/RawSources/Clean DF - R")
+
 imp_master_df <- read_csv("imp_master_df.csv") # 27 countries - Worldwide Bureaucracy Indicators version 18 indicators
 imp_master_df <- imp_master_df[, -1]
 
@@ -157,6 +158,7 @@ imp_master_df_redux <- imp_master_df %>%
            country_code != "SVN" &
            country_code != "DNK" ) %>% droplevels() 
 str(imp_master_df_redux)
+levels(imp_master_df_redux$country)
 summary(imp_master_df_redux)
 gg_miss_var(imp_master_df_redux, facet = country)
 str(imp_master_df_redux)
