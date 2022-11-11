@@ -119,11 +119,13 @@ imp_master_df <- inner_join(im_wwbi, # the "im_wwbi" has 18 variables
                                "year")) %>% 
               droplevels() %>% 
               replace_with_na_all(condition = ~.x == 0.0000000000) %>% # replacing 0s with NA
-              filter(country_code %in% c("AUT", "BEL", "CZE",  "EST", "ESP",
+              filter(country_code %in% c("AUT", "BEL", "CZE",  "EST",
                                          "FIN", "FRA", "GRC", "HUN", 
                                          "IRL", "ITA", "LTU", "LUX", 
-                                         "LVA", "POL", "PRT")) # filtering for 16 European countries
-  
+                                         "LVA", "POL", "PRT", "ESP",
+                                         "ISL", "SVK", "CHE","GBR")) # filtering for 16 European countries
+
+ 
 str(imp_master_df)
 summary(imp_master_df)
 vis_dat(imp_master_df)
