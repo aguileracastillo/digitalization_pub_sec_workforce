@@ -42,8 +42,8 @@ un_egov_eu <- read_csv(here("Data",
 un_egov_eu <- un_egov_eu[, -c(1, 4: 7)] # deleting unnecessary columns
 un_egov_eu[, 1:2] <- lapply(un_egov_eu[1:2], 
                             as.factor ) # change var type to factor
-levels(un_egov_eu$country) # check the list of countries in the df
-nlevels(un_egov_eu$country) # the "un_egov_eu" df contains 24 countries
+levels(un_egov_eu$country_code) # check the list of countries in the df
+nlevels(un_egov_eu$country_code) # the "un_egov_eu" df contains 24 countries
 str(un_egov_eu) # check the structure of the "un_egov_eu"
 vis_miss(un_egov_eu) # visualize missing values
 
@@ -53,26 +53,27 @@ wb_gdp_eu <- read_csv(here("Data",
                            "Raw",
                            "gdp_upop_eu.csv")) # Loading the WB - GDP & POP 3 variables
 wb_gdp_eu <- wb_gdp_eu[, -c(1, 4: 7)] # deleting unnecessary columns
-wb_gdp_eu[, 1:3] <- lapply(wb_gdp_eu[1:3], 
+wb_gdp_eu[, 1:2] <- lapply(wb_gdp_eu[1:2], 
                            as.factor ) # change var type to factor
-levels(wb_gdp_eu$country) # check the list of countries in the df
-nlevels(wb_gdp_eu$country) # the "wb_gdp_eu" df contains 24 countries
+levels(wb_gdp_eu$country_code) # check the list of countries in the df
+nlevels(wb_gdp_eu$country_code) # the "wb_gdp_eu" df contains 24 countries
 str(wb_gdp_eu) # check the structure of the "wb_gdp_eu"
 vis_miss(wb_gdp_eu) # visualize missing values
 
 #### OECD - Labor Force Participation Rate ####
 oecd_lfpr_eu <- read_csv(here("Data", 
                               "Raw",
-                              "oecd_lfpr_eu.csv")) # Loading the OECD - LFPR 1 varible
+                              "oecd_lfpr_eu.csv")) # Loading the OECD - LFPR 1 variable
 oecd_lfpr_eu <- oecd_lfpr_eu[, -c(1, 4: 7)] # deleting unnecessary columns
 oecd_lfpr_eu[, 1:2] <- lapply(oecd_lfpr_eu[1:2], 
                               as.factor ) # change var type to factor
-levels(oecd_lfpr_eu$country) # check the list of countries in the df
-nlevels(oecd_lfpr_eu$country) # the "oecd_lfpr_eu" df contains 24 countries
+levels(oecd_lfpr_eu$country_code) # check the list of countries in the df
+nlevels(oecd_lfpr_eu$country_code) # the "oecd_lfpr_eu" df contains 24 countries
 str(oecd_lfpr_eu) # check the structure of the "oecd_lfpr_eu"
 vis_miss(oecd_lfpr_eu) # visualize missing values
-setdiff(im_wwbi$country, oecd_pol_qog$country)
-setdiff(oecd_pol_qog$country, im_wwbi$country)
+
+setdiff(im_wwbi$country_code, oecd_lfpr_eu$country_code)
+
 
 #### OECD - Quality of Government ####
 oecd_pol_qog <- read_csv(here("Data", 
@@ -81,20 +82,22 @@ oecd_pol_qog <- read_csv(here("Data",
 oecd_pol_qog <- oecd_pol_qog[, -c(1, 4: 7)] # deleting unnecessary columns
 oecd_pol_qog[, 1:2] <- lapply(oecd_pol_qog[1:2], 
                               as.factor ) # change var type to factor
-levels(oecd_pol_qog$country) # check the list of countries in the df
-nlevels(oecd_pol_qog$country) # the "oecd_pol_qog" df contains 24 countries
+levels(oecd_pol_qog$country_code) # check the list of countries in the df
+nlevels(oecd_pol_qog$country_code) # the "oecd_pol_qog" df contains 24 countries
 str(oecd_pol_qog) # check the structure of the "oecd_pol_qog"
 vis_miss(oecd_pol_qog) # visualize missing values
 
-#### United Nations E-Government Index ####
+setdiff(oecd_pol_qog$country_code, im_wwbi$country_code) # 4 differences found in country code
+
+#### General government expenditure by function COFOG % GDP (eurostat GOV_10A_EXP) ####
 cofog_ggtot <- read_csv(here("Data", 
                              "Raw",
-                             "cofog_tot_df.csv")) # Loading the UN E-Gov Index 1 variable
+                             "cofog_tot_df.csv")) # General government expenditure by function COFOG
 cofog_ggtot <- cofog_ggtot[, -c(1, 4: 7)] # deleting unnecessary columns
 cofog_ggtot[, 1:2] <- lapply(cofog_ggtot[1:2], 
                              as.factor ) # change var type to factor
-levels(cofog_ggtot$country) # check the list of countries in the df
-nlevels(cofog_ggtot$country) # the "cofog_ggtot" df contains 24 countries
+levels(cofog_ggtot$country_code) # check the list of countries in the df
+nlevels(cofog_ggtot$country_code) # the "cofog_ggtot" df contains 24 countries
 str(cofog_ggtot) # check the structure of the "cofog_ggtot"
 vis_miss(cofog_ggtot) # visualize missing values
 
@@ -117,20 +120,25 @@ imp_master_df <- inner_join(im_wwbi, # the "im_wwbi" has 18 variables
               left_join(cofog_ggtot, # the "cofog_ggtot" has 1 variables 
                         by = c("country_code", 
                                "year")) %>% 
-              droplevels() %>% 
               replace_with_na_all(condition = ~.x == 0.0000000000) %>% # replacing 0s with NA
               filter(country_code %in% c("AUT", "BEL", "CZE",  "EST",
                                          "FIN", "FRA", "GRC", "HUN", 
                                          "IRL", "ITA", "LTU", "LUX", 
                                          "LVA", "POL", "PRT", "ESP",
-                                         "ISL", "SVK", "CHE","GBR")) # filtering for 16 European countries
+                                         "ISL", "SVK", "CHE","GBR")) %>% # filtering for 20 European countries
+              droplevels()
 
- 
+
+droplevels(imp_master_df$country_code)
+droplevels(imp_master_df$country)
+droplevels(imp_master_df$year)
 str(imp_master_df)
+levels(imp_master_df$country_code)
+nlevels(imp_master_df$country_code)
 summary(imp_master_df)
 vis_dat(imp_master_df)
 vis_miss(imp_master_df)
-prop_miss(master_df)
+prop_miss(imp_master_df)
 gg_miss_var(imp_master_df, facet = year)
 gg_miss_var(imp_master_df, facet = country)
 

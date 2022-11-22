@@ -19,8 +19,8 @@ library(data.table)
 # only the chosen variables. The WWBI has missing values 
 # in which some countries needed imputation treatment. The imputation was made
 # using the "imputeTS" package imputations for time series, after applying imputation
-# the result is the "wwwbi_impt_df.csv" which contains ONLY the wwbi indicators
-# for EU countries. The "wwwbi_impt_df.csv" file will be used in the script master_df
+# the result is the "wwbi_impt_df.csv" which contains ONLY the wwbi indicators
+# for EU countries. The "wwbi_impt_df.csv" file will be used in the script master_df
 # to merge the wwbi with the other databases such as oecd. 
 
 
@@ -76,15 +76,15 @@ wwbi <- wwbi[, c(2,4, 5:23)] # selecting the necessary columns to format from wi
 wwbi1<- gather(wwbi, year, value, c(-1:-2)) # converting into a long format 
 wwbi2<- spread(wwbi1, "ind_code", "value") # placing every variable into columns
 
-wwbi_eu <- inner_join(wwbi2, # doing a inner join with EU country members keep observation present 
-                     eu_member, # in wwbi2 leaving out the counries that are not EU memeber,
+wwbi_eu <- inner_join(wwbi2, # doing a inner join with EU country members keep observations present 
+                     eu_member, # in wwbi2 leaving out the countries that are not EU member,
                      by = "country_code") # in total the df has 532 rows and 97 columns
 
 wwbi_eu<- wwbi_eu[, c(2, 1, 95:97, 41,43,53,57,
                       59,49,51,54,56,60,
                       13,3,8,15,6,7,93,94)] # this will select the variables we are interested in
 
-wwbi_eu <- droplevels(wwbi_eu) # dropping countries that still appaer as non EU countries
+wwbi_eu <- droplevels(wwbi_eu) # dropping countries that still appear as non EU countries
 wwbi_eu[, 2:5] <- lapply(wwbi_eu[2:5], as.factor ) # changing var type as factor
 wwbi_eu[, c(1, 6:23)] <- lapply(wwbi_eu[c(1,6:23)], as.numeric) # changing var type as numeric
 
@@ -113,14 +113,14 @@ wwbi_eu <- wwbi_eu %>%
 ### Preparing data for imputation
 # this paper https://journal.r-project.org/archive/2017/RJ-2017-009/index.html used imputeTS 
 # with the spline https://en.wikipedia.org/wiki/Spline_interpolation 
-# this method  is suitable for multivariate time series imputation
+# this method is suitable for multivariate time series imputation
 # the process of imputation is the following: 
 # 1 sub-setting for each country 
-# 2 count how many observations are, the result will be used fill the argument m in the mice function
+# 2 count how many observations there are
 # 3 get the imputed df with the function complete
 # 4 check the imputed df with vis_miss 
 
-
+## Visualization before imputation
 vis_miss(wwbi_eu) # explore missing values before imputation
 gg_miss_var(wwbi_eu, facet = year) # explore missing values by year
 gg_miss_var(wwbi_eu, facet = country) # explore missing values by country
@@ -457,6 +457,8 @@ df_list <- list(aut_impt, bel_impt, bul_impt, # here we create a data frame list
 
 wwbi_impt_df <- rbindlist(df_list, # binding all the imputed countries 
                           use.names = TRUE) # creates the imputed df
+
+vis_miss(wwbi_impt_df)
 
 wwbi_impt_df <- wwbi_impt_df %>%  
                 filter(year %in% # filtering by years of our interest
