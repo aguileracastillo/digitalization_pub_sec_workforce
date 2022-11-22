@@ -45,7 +45,7 @@ ggplot(imp_master_df,
 
 ggplot(imp_master_df, 
        aes(x= online_ser_index , # online service index
-           y=  fpu_em_clerks)) + # Females as a share of public paid employees  (Clreks)
+           y=  fpu_em_clerks)) + # Females as a share of public paid employees  (Clerks)
   geom_point() + # scatter plot
   geom_smooth(method=lm)  + # trend line
   facet_wrap(~country) # by country
@@ -83,12 +83,13 @@ ggplot(imp_master_df,
 panel_data <- pdata.frame(imp_master_df, # converting our data into panel data with plm function
                           index = c("country", # individuals 
                                     "year")) # time 
-zpanel_data <- panel_data
-zpanel_data <- zpanel_data[, -c(3,10)]
-zpanel_data[ ,c(3:26, 28:32)] = scale(zpanel_data[ ,c(3:27,28: 32)]) # normalizing all variables but per_growth_gdp
+
+zpanel_data <- panel_data 
+zpanel_data <- zpanel_data[, -c(3,10)] # remove country_code and column 10 with NAs
+zpanel_data[ ,c(3:26, 28:32)] = scale(zpanel_data[ ,c(3:26, 28:32)]) # normalizing all variables except per_growth_gdp
 summary(zpanel_data)
 
-fez1 <- plm(psec_sformal_em ~ egov_index +  # Try with psec_sformal_em,  
+fez1 <- plm(psec_sformal_em ~ hum_cap_index +  # Try with psec_sformal_em,  
              log(per_growth_gdp) + wbgi_gee + icrg_qog , 
            data = zpanel_data, 
            p.model= "within")
@@ -98,7 +99,7 @@ stargazer(fez1, type = "text")
 summary(fe1)
 
 
-fez2 <- plm(psec_spaid_em_urban ~ egov_index + 
+fez2 <- plm(psec_spaid_em_urban ~ hum_cap_index + 
              log(per_growth_gdp) + wbgi_gee + icrg_qog , 
            data = zpanel_data, 
            p.model= "within")
@@ -108,7 +109,7 @@ stargazer(fez2, type = "text")
 summary(fe2)
 
 
-fez3 <- plm(fpu_em_senior_official ~ egov_index + 
+fez3 <- plm(fpu_em_senior_official ~ hum_cap_index + 
              log(per_growth_gdp) + wbgi_gee + icrg_qog , 
            data = zpanel_data, 
            p.model= "within")
