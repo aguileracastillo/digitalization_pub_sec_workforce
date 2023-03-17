@@ -84,6 +84,7 @@ panel_data <- pdata.frame(imp_master_df, # converting our data into panel data w
                           index = c("country", # individuals 
                                     "year")) # time 
 
+## Normalizing data using scale function (z means normalized)
 zpanel_data <- panel_data 
 zpanel_data <- zpanel_data[, -c(3,10)] # remove country_code and column 10 with NAs
 zpanel_data[ ,c(3:26, 28:32)] = scale(zpanel_data[ ,c(3:26, 28:32)]) # normalizing all variables except per_growth_gdp
@@ -106,7 +107,7 @@ fez2 <- plm(psec_spaid_em_urban ~ hum_cap_index +
 
 colnames(imp_master_df)
 stargazer(fez2, type = "text")
-summary(fe2)
+summary(fez2)
 
 
 fez3 <- plm(fpu_em_senior_official ~ hum_cap_index + 
@@ -116,7 +117,7 @@ fez3 <- plm(fpu_em_senior_official ~ hum_cap_index +
 
 colnames(imp_master_df)
 stargazer(fez3, type = "text")
-summary(fe3)
+summary(fez3)
 
 stargazer(fez1, fez2, fez3, type = "text")
 
