@@ -9,6 +9,9 @@ library(visdat)
 library(ggplot2)
 library(here)
 
+##load environment
+load(here("script", "Environments", "master_df.RData"))
+
 #### CONTEXT OF THE DATA #####
 # This script aims to join the imputed data set wwbi with the other data sets 
 # to create one master data set that will be used to run the econometric models
@@ -148,9 +151,3 @@ write.csv(imp_master_df, # Saving the imputed master df with 96 observations & 1
                       "imp_master_df.csv")) 
 
 
-
-
-
-
-
-         
