@@ -14,8 +14,11 @@ library(Amelia)
 library(imputeTS)
 library(data.table)
 
+##load environment
+load(here("script", "Environments", "WWBI_database.RData"))
+
 #### CONTEXT OF THE DATA #####
-# The data used in this script is the World Wide Bureaucracy indicator that filters
+# The data used in this script is the World Wide Bureaucracy Indicators that filters
 # only the chosen variables. The WWBI has missing values 
 # in which some countries needed imputation treatment. The imputation was made
 # using the "imputeTS" package imputations for time series, after applying imputation
@@ -70,7 +73,7 @@ colnames(wwbi) # looking at colnames we need to change from wide to long format
 
 ### Cleaning and Reshaping data ####
 
-## the df wwbi needs to be reshape usually year 
+## the df wwbi needs to be reshaped usually year 
 ## are in one column and variables in different columns
 wwbi <- wwbi[, c(2,4, 5:23)] # selecting the necessary columns to format from wide to long
 wwbi1<- gather(wwbi, year, value, c(-1:-2)) # converting into a long format 
@@ -84,9 +87,6 @@ wwbi_eu<- wwbi_eu[, c(2, 1, 95:97, 41,43,53,57,
                       59,49,51,54,56,60,
                       13,3,8,15,6,7,93,94)] # this will select the variables we are interested in
 
-wwbi_eu <- droplevels(wwbi_eu) # dropping countries that still appear as non EU countries
-wwbi_eu[, 2:5] <- lapply(wwbi_eu[2:5], as.factor ) # changing var type as factor
-wwbi_eu[, c(1, 6:23)] <- lapply(wwbi_eu[c(1,6:23)], as.numeric) # changing var type as numeric
 
 # this long code renames the variables of our interest into a more readable description 
 
