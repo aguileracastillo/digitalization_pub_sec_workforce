@@ -97,7 +97,7 @@ fez1 <- plm(psec_sformal_em ~ hum_cap_index +  # Try with psec_sformal_em,
 
 colnames(imp_master_df)
 stargazer(fez1, type = "text")
-summary(fe1)
+summary(fez1)
 
 
 fez2 <- plm(psec_spaid_em_urban ~ hum_cap_index + 
@@ -110,7 +110,7 @@ stargazer(fez2, type = "text")
 summary(fez2)
 
 
-fez3 <- plm(fpu_em_senior_official ~ hum_cap_index + 
+fez3 <- plm(wbill_per_gdp ~ hum_cap_index + 
              log(per_growth_gdp) + wbgi_gee + icrg_qog , 
            data = zpanel_data, 
            p.model= "within")
@@ -121,6 +121,24 @@ summary(fez3)
 
 stargazer(fez1, fez2, fez3, type = "text")
 
+## Wage-bill as Y
+fez4 <- plm(wbill_per_pub_expenditure ~ egov_index + 
+              log(per_growth_gdp) + wbgi_gee + icrg_qog , 
+            data = zpanel_data, 
+            p.model= "within")
+
+colnames(imp_master_df)
+stargazer(fez4, type = "text")
+summary(fez4)
+
+fez5 <- plm(wbill_per_gdp ~ egov_index + 
+              log(per_growth_gdp) + wbgi_gee + icrg_qog , 
+            data = zpanel_data, 
+            p.model= "within")
+
+colnames(imp_master_df)
+stargazer(fez5, type = "text")
+summary(fez5)
 
 
 write.csv(zpanel_data, file = "zpanel_data.csv")
