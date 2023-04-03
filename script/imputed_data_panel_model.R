@@ -111,7 +111,7 @@ stargazer(fez2, type = "text")
 summary(fez2)
 
 
-fez3 <- plm(wbill_per_gdp ~ hum_cap_index + 
+fez3 <- plm(wbill_per_gdp ~ online_ser_index + 
              log(per_growth_gdp) + wbgi_gee + icrg_qog , 
            data = zpanel_data, 
            p.model= "within")
@@ -123,7 +123,7 @@ summary(fez3)
 stargazer(fez1, fez2, fez3, type = "text")
 
 ## Wage-bill as Y
-fez4 <- plm(wbill_per_pub_expenditure ~ egov_index + 
+fez4 <- plm(wbill_per_gdp ~ telcom_infra_index + 
               log(per_growth_gdp) + wbgi_gee + icrg_qog , 
             data = zpanel_data, 
             p.model= "within")
