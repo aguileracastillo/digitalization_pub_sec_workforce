@@ -91,8 +91,9 @@ zpanel_data <- zpanel_data[, -c(3,10)] # remove country_code and column 10 with 
 zpanel_data[ ,c(3:26, 28:32)] = scale(zpanel_data[ ,c(3:26, 28:32)]) # normalizing all variables except per_growth_gdp
 summary(zpanel_data)
 
-fez1 <- plm(psec_sformal_em ~ hum_cap_index +  # Try with psec_sformal_em,  
-             log(per_growth_gdp) + wbgi_gee + icrg_qog , 
+## Run model at the national level (formal employment & wage bill % gdp)
+fez1 <- plm(psec_sformal_em ~ egov_index +  # Try with psec_sformal_em,  
+             log(per_growth_gdp) + icrg_qog + upop, 
            data = zpanel_data, 
            p.model= "within")
 
@@ -101,30 +102,30 @@ stargazer(fez1, type = "text")
 summary(fez1)
 
 
-fez2 <- plm(psec_spaid_em_urban ~ hum_cap_index + 
-             log(per_growth_gdp) + wbgi_gee + icrg_qog , 
-           data = zpanel_data, 
-           p.model= "within")
+fez2 <- plm(wbill_per_gdp ~ egov_index +    
+           log(per_growth_gdp) +icrg_qog + upop, 
+         data = zpanel_data, 
+         p.model= "within")
 
 colnames(imp_master_df)
 stargazer(fez2, type = "text")
 summary(fez2)
 
+stargazer(fez1, fez2, type = "text")
 
-fez3 <- plm(wbill_per_gdp ~ online_ser_index + 
-             log(per_growth_gdp) + wbgi_gee + icrg_qog , 
-           data = zpanel_data, 
-           p.model= "within")
+## Run model by occupational composition  (five levels)
+fez3 <- plm(fpu_em_clerks ~ egov_index +    
+              log(per_growth_gdp) + icrg_qog + upop, 
+            data = zpanel_data, 
+            p.model= "within")
 
 colnames(imp_master_df)
 stargazer(fez3, type = "text")
 summary(fez3)
 
-stargazer(fez1, fez2, fez3, type = "text")
 
-## Wage-bill as Y
-fez4 <- plm(wbill_per_gdp ~ telcom_infra_index + 
-              log(per_growth_gdp) + wbgi_gee + icrg_qog , 
+fez4 <- plm(fpu_em_elem_ocupation ~ egov_index +    
+              log(per_growth_gdp) + icrg_qog + upop, 
             data = zpanel_data, 
             p.model= "within")
 
@@ -132,14 +133,64 @@ colnames(imp_master_df)
 stargazer(fez4, type = "text")
 summary(fez4)
 
-fez5 <- plm(wbill_per_gdp ~ egov_index + 
-              log(per_growth_gdp) + wbgi_gee + icrg_qog , 
-            data = zpanel_data, 
-            p.model= "within")
+fez5  <- plm(fpu_em_professional ~ egov_index +    
+               log(per_growth_gdp) + icrg_qog + upop, 
+             data = zpanel_data, 
+             p.model= "within")
 
 colnames(imp_master_df)
 stargazer(fez5, type = "text")
 summary(fez5)
+
+fez6 <- plm(fpu_em_senior_official ~ egov_index +    
+              log(per_growth_gdp) + icrg_qog + upop, 
+            data = zpanel_data, 
+            p.model= "within")
+
+colnames(imp_master_df)
+stargazer(fez6, type = "text")
+summary(fez6)
+
+fez7 <- plm(fpu_em_technician ~ egov_index +    
+              log(per_growth_gdp) + icrg_qog + upop, 
+            data = zpanel_data, 
+            p.model= "within")
+
+colnames(imp_master_df)
+stargazer(fez7, type = "text")
+summary(fez7)
+
+stargazer(fez3, fez4, fez5, fez6, fez7, type = "text")
+
+## Run model by educational tier (three levels)
+fez8 <- plm(pri_ed_sppaid_em ~ egov_index +    
+              log(per_growth_gdp) +icrg_qog + upop, 
+            data = zpanel_data, 
+            p.model= "within")
+
+colnames(imp_master_df)
+stargazer(fez8, type = "text")
+summary(fez8)
+
+fez9 <- plm(sec_ed_sppaid_em ~ egov_index +    
+              log(per_growth_gdp) +icrg_qog + upop, 
+            data = zpanel_data, 
+            p.model= "within")
+
+colnames(imp_master_df)
+stargazer(fez9, type = "text")
+summary(fez9)
+
+fez10 <- plm(ter_ed_sppaid_em ~ egov_index +    
+               log(per_growth_gdp) +icrg_qog + upop, 
+             data = zpanel_data, 
+             p.model= "within")
+
+colnames(imp_master_df)
+stargazer(fez10, type = "text")
+summary(fez10)
+
+stargazer(fez8, fez9, fez10, type = "text")
 
 
 write.csv(zpanel_data, file = "zpanel_data.csv")
