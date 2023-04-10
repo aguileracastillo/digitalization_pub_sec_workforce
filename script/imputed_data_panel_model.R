@@ -91,6 +91,9 @@ zpanel_data <- zpanel_data[, -c(3,10)] # remove country_code and column 10 with 
 zpanel_data[ ,c(3:26, 28:32)] = scale(zpanel_data[ ,c(3:26, 28:32)]) # normalizing all variables except per_growth_gdp
 summary(zpanel_data)
 
+stargazer(zpanel_data, type = "text", title = "Table 1: Summary Statistics", out = "Table1.html")
+
+
 ## Run model at the national level (formal employment & wage bill % gdp)
 fez1 <- plm(psec_sformal_em ~ egov_index +  # Try with psec_sformal_em,  
              log(per_growth_gdp) + icrg_qog + upop, 
@@ -112,6 +115,7 @@ stargazer(fez2, type = "text")
 summary(fez2)
 
 stargazer(fez1, fez2, type = "text")
+stargazer(fez1, fez2, type = "text", title = "Table 2: Aggregate Level: Public Sector Employment as Share of Formal Employment & Wage Bill as % of GDP", out = "Table2.html")
 
 ## Run model by occupational composition  (five levels)
 fez3 <- plm(fpu_em_clerks ~ egov_index +    
@@ -161,6 +165,8 @@ stargazer(fez7, type = "text")
 summary(fez7)
 
 stargazer(fez3, fez4, fez5, fez6, fez7, type = "text")
+stargazer(fez3, fez4, fez5, fez6, fez7, type = "text", title = "Table 3: By Occupational Function: WWBI Database Five Levels", out = "Table3.html")
+
 
 ## Run model by educational tier (three levels)
 fez8 <- plm(pri_ed_sppaid_em ~ egov_index +    
@@ -191,6 +197,8 @@ stargazer(fez10, type = "text")
 summary(fez10)
 
 stargazer(fez8, fez9, fez10, type = "text")
+stargazer(fez8, fez9, fez10, type = "text", title = "Table 4: By Educational Tier: WWBI Database Three Levels", out = "Table4.html")
+
 
 
 write.csv(zpanel_data, file = "zpanel_data.csv")
