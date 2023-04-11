@@ -14,6 +14,7 @@ library(gplots)
 library(here)
 library(lmtest)
 
+load(here("script", "Environments", ""))
 
 ### Loading the imputed master df ####
 
@@ -88,6 +89,7 @@ panel_data <- pdata.frame(imp_master_df, # converting our data into panel data w
 
 ## Normalizing data using scale function (z means normalized)
 zpanel_data <- panel_data 
+zpanel_data <- zpanel_data[,-10]
 zpanel_data <- zpanel_data[, -c(3,10)] # remove country_code and column 10 with NAs
 zpanel_data[ ,c(3:26, 28:32)] = scale(zpanel_data[ ,c(3:26, 28:32)]) # normalizing all variables except per_growth_gdp
 summary(zpanel_data)
@@ -99,12 +101,12 @@ stargazer(zpanel_data, type = "text", title = "Table 1: Summary Statistics", out
 fez1 <- plm(psec_sformal_em ~ egov_index +  # Try with psec_sformal_em,  
              log(per_growth_gdp) + icrg_qog + upop, 
            data = zpanel_data, 
-           p.model= "within")
+           model= "within")
 
 rez1 <- plm(psec_sformal_em ~ egov_index +  # Try with psec_sformal_em,  
               log(per_growth_gdp) + icrg_qog + upop, 
             data = zpanel_data, 
-            p.model= "random")
+            model= "random")
 
 colnames(imp_master_df)
 stargazer(fez1, type = "text")
@@ -112,19 +114,19 @@ stargazer(rez1, type = "text")
 summary(fez1)
 summary(rez1)
 
-hausman_test1 <- phtest(fez1, rez1)
+hausman_test1 <- phtest(rez1, fez1)
 print(hausman_test1)
 
 
 fez2 <- plm(wbill_per_gdp ~ egov_index +    
            log(per_growth_gdp) +icrg_qog + upop, 
          data = zpanel_data, 
-         p.model= "within")
+         model= "within")
 
 rez2 <- plm(wbill_per_gdp ~ egov_index +    
               log(per_growth_gdp) +icrg_qog + upop, 
             data = zpanel_data, 
-            p.model= "random")
+            model= "random")
 
 colnames(imp_master_df)
 stargazer(fez2, type = "text")
@@ -142,7 +144,7 @@ stargazer(fez1, fez2, type = "text", title = "Table 2: Aggregate Level: Public S
 fez3 <- plm(fpu_em_clerks ~ egov_index +    
               log(per_growth_gdp) + icrg_qog + upop, 
             data = zpanel_data, 
-            p.model= "within")
+            model= "within")
 
 colnames(imp_master_df)
 stargazer(fez3, type = "text")
@@ -152,7 +154,7 @@ summary(fez3)
 fez4 <- plm(fpu_em_elem_ocupation ~ egov_index +    
               log(per_growth_gdp) + icrg_qog + upop, 
             data = zpanel_data, 
-            p.model= "within")
+            model= "within")
 
 colnames(imp_master_df)
 stargazer(fez4, type = "text")
@@ -161,7 +163,7 @@ summary(fez4)
 fez5  <- plm(fpu_em_professional ~ egov_index +    
                log(per_growth_gdp) + icrg_qog + upop, 
              data = zpanel_data, 
-             p.model= "within")
+             model= "within")
 
 colnames(imp_master_df)
 stargazer(fez5, type = "text")
@@ -170,7 +172,7 @@ summary(fez5)
 fez6 <- plm(fpu_em_senior_official ~ egov_index +    
               log(per_growth_gdp) + icrg_qog + upop, 
             data = zpanel_data, 
-            p.model= "within")
+            model= "within")
 
 colnames(imp_master_df)
 stargazer(fez6, type = "text")
@@ -179,7 +181,7 @@ summary(fez6)
 fez7 <- plm(fpu_em_technician ~ egov_index +    
               log(per_growth_gdp) + icrg_qog + upop, 
             data = zpanel_data, 
-            p.model= "within")
+            model= "within")
 
 colnames(imp_master_df)
 stargazer(fez7, type = "text")
@@ -193,7 +195,7 @@ stargazer(fez3, fez4, fez5, fez6, fez7, type = "text", title = "Table 3: By Occu
 fez8 <- plm(pri_ed_sppaid_em ~ egov_index +    
               log(per_growth_gdp) +icrg_qog + upop, 
             data = zpanel_data, 
-            p.model= "within")
+            model= "within")
 
 colnames(imp_master_df)
 stargazer(fez8, type = "text")
@@ -202,7 +204,7 @@ summary(fez8)
 fez9 <- plm(sec_ed_sppaid_em ~ egov_index +    
               log(per_growth_gdp) +icrg_qog + upop, 
             data = zpanel_data, 
-            p.model= "within")
+            model= "within")
 
 colnames(imp_master_df)
 stargazer(fez9, type = "text")
@@ -211,7 +213,7 @@ summary(fez9)
 fez10 <- plm(ter_ed_sppaid_em ~ egov_index +    
                log(per_growth_gdp) +icrg_qog + upop, 
              data = zpanel_data, 
-             p.model= "within")
+             model= "within")
 
 colnames(imp_master_df)
 stargazer(fez10, type = "text")
