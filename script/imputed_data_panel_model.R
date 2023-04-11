@@ -101,9 +101,19 @@ fez1 <- plm(psec_sformal_em ~ egov_index +  # Try with psec_sformal_em,
            data = zpanel_data, 
            p.model= "within")
 
+rez1 <- plm(psec_sformal_em ~ egov_index +  # Try with psec_sformal_em,  
+              log(per_growth_gdp) + icrg_qog + upop, 
+            data = zpanel_data, 
+            p.model= "random")
+
 colnames(imp_master_df)
 stargazer(fez1, type = "text")
+stargazer(rez1, type = "text")
 summary(fez1)
+summary(rez1)
+
+hausman_test1 <- phtest(fez1, rez1)
+print(hausman_test1)
 
 
 fez2 <- plm(wbill_per_gdp ~ egov_index +    
@@ -111,9 +121,19 @@ fez2 <- plm(wbill_per_gdp ~ egov_index +
          data = zpanel_data, 
          p.model= "within")
 
+rez2 <- plm(wbill_per_gdp ~ egov_index +    
+              log(per_growth_gdp) +icrg_qog + upop, 
+            data = zpanel_data, 
+            p.model= "random")
+
 colnames(imp_master_df)
 stargazer(fez2, type = "text")
+stargazer(rez2, type = "text")
 summary(fez2)
+summary(rez2)
+
+hausman_test2 <- phtest(fez2, rez2)
+print(hausman_test2)
 
 stargazer(fez1, fez2, type = "text")
 stargazer(fez1, fez2, type = "text", title = "Table 2: Aggregate Level: Public Sector Employment as Share of Formal Employment & Wage Bill as % of GDP", out = "Table2.html")
