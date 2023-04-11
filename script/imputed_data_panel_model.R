@@ -13,6 +13,9 @@ library(caret)
 library(gplots)
 library(here)
 library(lmtest)
+library(installr)
+
+updateR()
 
 load(here("script", "Environments", ""))
 
