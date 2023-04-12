@@ -13,7 +13,7 @@ library(caret)
 library(gplots)
 library(here)
 library(lmtest)
-library(installr)
+
 
 
 load(here("script", "Environments", ""))
