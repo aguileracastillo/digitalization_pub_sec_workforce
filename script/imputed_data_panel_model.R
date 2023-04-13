@@ -91,7 +91,7 @@ panel_data <- pdata.frame(imp_master_df, # converting our data into panel data w
 
 ## Normalizing data using scale function (z means normalized)
 zpanel_data <- panel_data 
-zpanel_data <- zpanel_data[,-10]
+
 zpanel_data <- zpanel_data[, -c(3,10)] # remove country_code and column 10 with NAs
 zpanel_data[ ,c(3:26, 28:32)] = scale(zpanel_data[ ,c(3:26, 28:32)]) # normalizing all variables except per_growth_gdp
 summary(zpanel_data)
@@ -116,7 +116,13 @@ stargazer(rez1, type = "text")
 summary(fez1)
 summary(rez1)
 
-hausman_test1 <- phtest(rez1, fez1) #Hausman Test
+## H0= Null Hypothesis: Random effects is consistent  
+## H1= Alternative Hypothesis: Random effect inconsistent 
+## a= significance level 0.1 , 0.05 , 0.01
+## p-value= 0.0003583
+
+
+hausman_test1 <- phtest(rez1, fez1) #Hausman1 Test reject H0 with a=0.05 so fixed effects is recommended 
 print(hausman_test1)
 
 
@@ -136,7 +142,12 @@ stargazer(rez2, type = "text")
 summary(fez2)
 summary(rez2)
 
-hausman_test2 <- phtest(fez2, rez2) #Hausman Test
+## H0= Null Hypothesis: Random effects is consistent  
+## H1= Alternative Hypothesis: Random effect inconsistent 
+## a= significance level 0.1 , 0.05 , 0.01
+## p-value = 0.08145
+
+hausman_test2 <- phtest(fez2, rez2) #Hausman1 Test reject H0 with a=0.1 so fixed effects is recommended 
 print(hausman_test2)
 
 stargazer(fez1, fez2, type = "text")
@@ -159,7 +170,13 @@ stargazer(rez3, type = "text")
 summary(fez3)
 summary(rez3)
 
-hausman_test3 <- phtest(fez3, rez3) #Hausman Test
+## H0= Null Hypothesis: Random effects is consistent  
+## H1= Alternative Hypothesis: Random effect inconsistent 
+## a= significance level 0.1 , 0.05 , 0.01
+## p-value = 0.1058
+
+
+hausman_test3 <- phtest(fez3, rez3) #Hausman1 Test reject H0 with a=0.1 so fixed effects is recommended 
 print(hausman_test3)
 
 
@@ -179,7 +196,12 @@ stargazer(rez4, type = "text")
 summary(fez4)
 summary(rez4)
 
-hausman_test4 <- phtest(fez4, rez4) #Hausman Test
+## H0= Null Hypothesis: Random effects is consistent  
+## H1= Alternative Hypothesis: Random effect inconsistent 
+## a= significance level 0.1 , 0.05 , 0.01
+## p-value = 0.8102
+
+hausman_test4 <- phtest(fez4, rez4) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test4)
 
 fez5  <- plm(fpu_em_professional ~ egov_index +    
@@ -198,7 +220,12 @@ stargazer(rez5, type = "text")
 summary(fez5)
 summary(rez5)
 
-hausman_test5 <- phtest(fez5, rez5) #Hausman Test
+## H0= Null Hypothesis: Random effects is consistent  
+## H1= Alternative Hypothesis: Random effect inconsistent 
+## a= significance level 0.1 , 0.05 , 0.01
+## p-value = 0.00000003494
+
+hausman_test5 <- phtest(fez5, rez5) #Hausman1 Test reject H0 with a=0.1 so fixed effects is recommended 
 print(hausman_test5)
 
 fez6 <- plm(fpu_em_senior_official ~ egov_index +    
@@ -217,7 +244,12 @@ stargazer(rez6, type = "text")
 summary(fez6)
 summary(rez6)
 
-hausman_test6 <- phtest(fez6, rez6) #Hausman Test
+## H0= Null Hypothesis: Random effects is consistent  
+## H1= Alternative Hypothesis: Random effect inconsistent 
+## a= significance level 0.1 , 0.05 , 0.01
+## p-value = 0.1852
+
+hausman_test6 <- phtest(fez6, rez6) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test6)
 
 fez7 <- plm(fpu_em_technician ~ egov_index +    
@@ -236,7 +268,12 @@ stargazer(rez7, type = "text")
 summary(fez7)
 summary(rez7)
 
-hausman_test7 <- phtest(fez7, rez7) #Hausman Test
+## H0= Null Hypothesis: Random effects is consistent  
+## H1= Alternative Hypothesis: Random effect inconsistent 
+## a= significance level 0.1 , 0.05 , 0.01
+## p-value = 0.954
+
+hausman_test7 <- phtest(fez7, rez7) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test7)
 
 stargazer(fez3, fez4, fez5, fez6, fez7, type = "text")
@@ -260,7 +297,12 @@ stargazer(rez8, type = "text")
 summary(fez8)
 summary(rez8)
 
-hausman_test8 <- phtest(fez8, rez8) #Hausman Test
+## H0= Null Hypothesis: Random effects is consistent  
+## H1= Alternative Hypothesis: Random effect inconsistent 
+## a= significance level 0.1 , 0.05 , 0.01
+## p-value = 0.7769
+
+hausman_test8 <- phtest(fez8, rez8) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test8)
 
 fez9 <- plm(sec_ed_sppaid_em ~ egov_index +    
@@ -279,7 +321,12 @@ stargazer(rez9, type = "text")
 summary(fez9)
 summary(rez9)
 
-hausman_test9 <- phtest(fez9, rez9) #Hausman Test
+## H0= Null Hypothesis: Random effects is consistent  
+## H1= Alternative Hypothesis: Random effect inconsistent 
+## a= significance level 0.1 , 0.05 , 0.01
+## p-value = 0.2958
+
+hausman_test9 <- phtest(fez9, rez9) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test9)
 
 fez10 <- plm(ter_ed_sppaid_em ~ egov_index +    
@@ -298,7 +345,12 @@ stargazer(rez10, type = "text")
 summary(fez10)
 summary(rez10)
 
-hausman_test10 <- phtest(fez10, rez10) #Hausman Test
+## H0= Null Hypothesis: Random effects is consistent  
+## H1= Alternative Hypothesis: Random effect inconsistent 
+## a= significance level 0.1 , 0.05 , 0.01
+##  p-value = 0.41
+
+hausman_test10 <- phtest(fez10, rez10) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test10)
 
 stargazer(fez8, fez9, fez10, type = "text")
