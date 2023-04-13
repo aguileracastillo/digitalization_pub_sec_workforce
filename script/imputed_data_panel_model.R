@@ -116,7 +116,7 @@ stargazer(rez1, type = "text")
 summary(fez1)
 summary(rez1)
 
-hausman_test1 <- phtest(rez1, fez1)
+hausman_test1 <- phtest(rez1, fez1) #Hausman Test
 print(hausman_test1)
 
 
@@ -136,7 +136,7 @@ stargazer(rez2, type = "text")
 summary(fez2)
 summary(rez2)
 
-hausman_test2 <- phtest(fez2, rez2)
+hausman_test2 <- phtest(fez2, rez2) #Hausman Test
 print(hausman_test2)
 
 stargazer(fez1, fez2, type = "text")
@@ -148,9 +148,19 @@ fez3 <- plm(fpu_em_clerks ~ egov_index +
             data = zpanel_data, 
             model= "within")
 
+rez3 <- plm(fpu_em_clerks ~ egov_index +    
+              log(per_growth_gdp) + icrg_qog + upop, 
+            data = zpanel_data, 
+            model= "random")
+
 colnames(imp_master_df)
 stargazer(fez3, type = "text")
+stargazer(rez3, type = "text")
 summary(fez3)
+summary(rez3)
+
+hausman_test3 <- phtest(fez3, rez3) #Hausman Test
+print(hausman_test3)
 
 
 fez4 <- plm(fpu_em_elem_ocupation ~ egov_index +    
@@ -158,36 +168,76 @@ fez4 <- plm(fpu_em_elem_ocupation ~ egov_index +
             data = zpanel_data, 
             model= "within")
 
+rez4 <- plm(fpu_em_elem_ocupation ~ egov_index +    
+              log(per_growth_gdp) + icrg_qog + upop, 
+            data = zpanel_data, 
+            model= "random")
+
 colnames(imp_master_df)
 stargazer(fez4, type = "text")
+stargazer(rez4, type = "text")
 summary(fez4)
+summary(rez4)
+
+hausman_test4 <- phtest(fez4, rez4) #Hausman Test
+print(hausman_test4)
 
 fez5  <- plm(fpu_em_professional ~ egov_index +    
                log(per_growth_gdp) + icrg_qog + upop, 
              data = zpanel_data, 
              model= "within")
 
+rez5 <- plm(fpu_em_professional ~ egov_index +    
+              log(per_growth_gdp) + icrg_qog + upop, 
+            data = zpanel_data, 
+            model= "random")
+
 colnames(imp_master_df)
 stargazer(fez5, type = "text")
+stargazer(rez5, type = "text")
 summary(fez5)
+summary(rez5)
+
+hausman_test5 <- phtest(fez5, rez5) #Hausman Test
+print(hausman_test5)
 
 fez6 <- plm(fpu_em_senior_official ~ egov_index +    
               log(per_growth_gdp) + icrg_qog + upop, 
             data = zpanel_data, 
             model= "within")
 
+rez6 <- plm(fpu_em_senior_official ~ egov_index +    
+              log(per_growth_gdp) + icrg_qog + upop, 
+            data = zpanel_data, 
+            model= "random")
+
 colnames(imp_master_df)
 stargazer(fez6, type = "text")
+stargazer(rez6, type = "text")
 summary(fez6)
+summary(rez6)
+
+hausman_test6 <- phtest(fez6, rez6) #Hausman Test
+print(hausman_test6)
 
 fez7 <- plm(fpu_em_technician ~ egov_index +    
               log(per_growth_gdp) + icrg_qog + upop, 
             data = zpanel_data, 
             model= "within")
 
+rez7 <- plm(fpu_em_technician ~ egov_index +    
+              log(per_growth_gdp) + icrg_qog + upop, 
+            data = zpanel_data, 
+            model= "random")
+
 colnames(imp_master_df)
 stargazer(fez7, type = "text")
+stargazer(rez7, type = "text")
 summary(fez7)
+summary(rez7)
+
+hausman_test7 <- phtest(fez7, rez7) #Hausman Test
+print(hausman_test7)
 
 stargazer(fez3, fez4, fez5, fez6, fez7, type = "text")
 stargazer(fez3, fez4, fez5, fez6, fez7, type = "text", title = "Table 3: By Occupational Function: WWBI Database Five Levels", out = "Table3.html")
@@ -199,27 +249,57 @@ fez8 <- plm(pri_ed_sppaid_em ~ egov_index +
             data = zpanel_data, 
             model= "within")
 
+rez8 <- plm(pri_ed_sppaid_em ~ egov_index +    
+              log(per_growth_gdp) +icrg_qog + upop, 
+            data = zpanel_data, 
+            model= "random")
+
 colnames(imp_master_df)
 stargazer(fez8, type = "text")
+stargazer(rez8, type = "text")
 summary(fez8)
+summary(rez8)
+
+hausman_test8 <- phtest(fez8, rez8) #Hausman Test
+print(hausman_test8)
 
 fez9 <- plm(sec_ed_sppaid_em ~ egov_index +    
               log(per_growth_gdp) +icrg_qog + upop, 
             data = zpanel_data, 
             model= "within")
 
+rez9 <- plm(sec_ed_sppaid_em ~ egov_index +    
+              log(per_growth_gdp) +icrg_qog + upop, 
+            data = zpanel_data, 
+            model= "random")
+
 colnames(imp_master_df)
 stargazer(fez9, type = "text")
+stargazer(rez9, type = "text")
 summary(fez9)
+summary(rez9)
+
+hausman_test9 <- phtest(fez9, rez9) #Hausman Test
+print(hausman_test9)
 
 fez10 <- plm(ter_ed_sppaid_em ~ egov_index +    
                log(per_growth_gdp) +icrg_qog + upop, 
              data = zpanel_data, 
              model= "within")
 
+rez10 <- plm(ter_ed_sppaid_em ~ egov_index +    
+               log(per_growth_gdp) +icrg_qog + upop, 
+             data = zpanel_data, 
+             model= "random")
+
 colnames(imp_master_df)
 stargazer(fez10, type = "text")
+stargazer(rez10, type = "text")
 summary(fez10)
+summary(rez10)
+
+hausman_test10 <- phtest(fez10, rez10) #Hausman Test
+print(hausman_test10)
 
 stargazer(fez8, fez9, fez10, type = "text")
 stargazer(fez8, fez9, fez10, type = "text", title = "Table 4: By Educational Tier: WWBI Database Three Levels", out = "Table4.html")
