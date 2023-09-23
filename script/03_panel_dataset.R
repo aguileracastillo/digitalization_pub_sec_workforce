@@ -16,7 +16,7 @@ library(lmtest)
 
 
 
-load(here("script", "Environments", ""))
+load(here("script", "Environments", "")) #######
 
 ### Loading the imputed master df ####
 
@@ -150,8 +150,8 @@ summary(rez2)
 hausman_test2 <- phtest(fez2, rez2) #Hausman1 Test reject H0 with a=0.1 so fixed effects is recommended 
 print(hausman_test2)
 
-stargazer(fez1, fez2, type = "text")
-stargazer(fez1, fez2, type = "text", title = "Table 2: Aggregate Level: Public Sector Employment as Share of Formal Employment & Wage Bill as % of GDP", out = "Table2.html")
+stargazer(fez1, rez2, type = "text")
+stargazer(fez1, rez2, type = "text", title = "Table 2: Aggregate Level: Public Sector Employment as Share of Formal Employment & Wage Bill as % of GDP", out = "Table2.html")
 
 ## Run model by occupational composition  (five levels)
 fez3 <- plm(fpu_em_clerks ~ egov_index +    
@@ -276,8 +276,8 @@ summary(rez7)
 hausman_test7 <- phtest(fez7, rez7) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test7)
 
-stargazer(fez3, fez4, fez5, fez6, fez7, type = "text")
-stargazer(fez3, fez4, fez5, fez6, fez7, type = "text", title = "Table 3: By Occupational Function: WWBI Database Five Levels", out = "Table3.html")
+stargazer(rez3, rez4, fez5, rez6, rez7, type = "text")
+stargazer(rez3, rez4, fez5, rez6, rez7, type = "text", title = "Table 3: By Occupational Function: WWBI Database Five Levels", out = "Table3.html")
 
 
 ## Run model by educational tier (three levels)
