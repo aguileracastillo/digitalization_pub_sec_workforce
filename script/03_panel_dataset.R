@@ -353,8 +353,8 @@ summary(rez10)
 hausman_test10 <- phtest(fez10, rez10) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test10)
 
-stargazer(fez8, fez9, fez10, type = "text")
-stargazer(fez8, fez9, fez10, type = "text", title = "Table 4: By Educational Tier: WWBI Database Three Levels", out = "Table4.html")
+stargazer(rez8, rez9, rez10, type = "text")
+stargazer(rez8, rez9, rez10, type = "text", title = "Table 4: By Educational Tier: WWBI Database Three Levels", out = "Table4.html")
 
 
 
