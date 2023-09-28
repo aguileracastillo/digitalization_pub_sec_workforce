@@ -93,52 +93,130 @@ panel_data <- pdata.frame(imp_master_df, # converting our data into panel data w
 zpanel_data <- panel_data 
 
 zpanel_data <- zpanel_data[, -c(3,10)] # remove country_code and column 10 with NAs
-zpanel_data[ ,c(3:26, 28:32)] = scale(zpanel_data[ ,c(3:26, 28:32)]) # normalizing all variables except per_growth_gdp
+zpanel_data[ ,c(3:25, 28:32)] = scale(zpanel_data[ ,c(3:25, 28:32)]) # normalizing all variables except per_growth_gdp
 summary(zpanel_data)
 
 stargazer(zpanel_data, type = "text", title = "Table 1: Summary Statistics", out = "Table1.html")
 
+################################################################################
+#################################### FIRST MODEL  ##############################
+################################################################################
 
 ## Run model at the national level (formal employment & wage bill % gdp)
 fez1 <- plm(psec_sformal_em ~ egov_index +  # Try with psec_sformal_em,  
-             log(per_growth_gdp) + icrg_qog + upop, 
+             log(gdp_percap) + icrg_qog + upop, 
            data = zpanel_data, 
            model= "within")
 
+stargazer(fez1, type = "text")
+
+
+## Includes the time and country dummy using the effect argument
+fez1_2way <- plm(psec_sformal_em ~ egov_index +  
+              log(gdp_percap) + icrg_qog + upop, 
+            data = zpanel_data, 
+            model = "within",
+            effect = "twoways")  # This includes both entity (country) and time fixed effects
+
+stargazer(fez1_2way, type = "text")
+
+
+## Uses the first differences 
+fd_model1 <- plm(psec_sformal_em ~ egov_index + log(gdp_percap) + icrg_qog + upop, 
+                data = zpanel_data, 
+                model = "fd")  # fd for first differences
+
+stargazer(fd_model1, type = "text")
+
+# Includes the time vars 
+zpanel_data$time <- as.numeric(zpanel_data$year)  # Creates the time var
+zpanel_data$time_squared <- zpanel_data$time^2. # Creates the time var-squared
+
+fez1_tvar <- plm(psec_sformal_em ~ egov_index +  
+              log(gdp_percap) + icrg_qog + upop + time + time_squared, 
+            data = zpanel_data, 
+            model = "within")
+
+stargazer(fez1_tvar, type = "text")
+
+# Random effects 
 rez1 <- plm(psec_sformal_em ~ egov_index +  # Try with psec_sformal_em,  
-              log(per_growth_gdp) + icrg_qog + upop, 
+              log(gdp_percap) + icrg_qog + upop, 
             data = zpanel_data, 
             model= "random")
 
-colnames(imp_master_df)
-stargazer(fez1, type = "text")
 stargazer(rez1, type = "text")
-summary(fez1)
-summary(rez1)
+
+
 
 ## H0= Null Hypothesis: Random effects is consistent  
 ## H1= Alternative Hypothesis: Random effect inconsistent 
 ## a= significance level 0.1 , 0.05 , 0.01
-## p-value= 0.0003583
+## chisq = 25.193, df = 4, p-value = 4.601e-05
 
-
-hausman_test1 <- phtest(rez1, fez1) #Hausman1 Test reject H0 with a=0.05 so fixed effects is recommended 
+#Hausman1 Test reject H0 with a=0.05 so FIXED EFFECTS is recommended 
+hausman_test1 <- phtest(rez1, fez1) 
 print(hausman_test1)
+
+################################################################################
+#################################### SECOND MODEL  ##############################
+################################################################################
+
 
 
 fez2 <- plm(wbill_per_gdp ~ egov_index +    
-           log(per_growth_gdp) +icrg_qog + upop, 
+           log(gdp_percap) +icrg_qog + upop, 
          data = zpanel_data, 
          model= "within")
 
+fez2 <- plm(wbill_per_gdp ~ egov_index +    
+              log(gdp_percap) +icrg_qog + upop, 
+            data = zpanel_data, 
+            model= "within",
+            effect = "twoways")
+
+fez2 <- plm(wbill_per_gdp ~ egov_index +    
+              log(per_growth_gdp) +icrg_qog + upop + time + time_squared, 
+            data = zpanel_data, 
+            model= "within")
+
+
+
 rez2 <- plm(wbill_per_gdp ~ egov_index +    
-              log(per_growth_gdp) +icrg_qog + upop, 
+              log(gdp_percap) +icrg_qog + upop, 
             data = zpanel_data, 
             model= "random")
+
+fd_model2 <- plm(wbill_per_gdp ~ egov_index +    
+              log(gdp_percap) +icrg_qog + upop, 
+            data = zpanel_data, 
+            model= "fd") # fd for first differences
+
+rez2 <- plm(wbill_per_gdp ~ egov_index +    
+              log(gdp_percap) +icrg_qog + upop, 
+            data = zpanel_data, 
+            model= "random",
+            effect = "twoways")
+
+
+rez2 <- plm(wbill_per_gdp ~ egov_index +    
+              log(gdp_percap) +icrg_qog + upop + time + time_squared, 
+            data = zpanel_data, 
+            model= "random")
+
+# Obtain clustered standard errors
+cl_se <- vcovHC(rez2, type = "HC3", cluster = "group")
+
+# Display the results with clustered standard errors
+coeftest(rez2, cl_se)
+
+
+
 
 colnames(imp_master_df)
 stargazer(fez2, type = "text")
 stargazer(rez2, type = "text")
+stargazer(fd_model2, type = "text")
 summary(fez2)
 summary(rez2)
 
@@ -147,11 +225,16 @@ summary(rez2)
 ## a= significance level 0.1 , 0.05 , 0.01
 ## p-value = 0.08145
 
-hausman_test2 <- phtest(fez2, rez2) #Hausman1 Test reject H0 with a=0.1 so fixed effects is recommended 
+hausman_test2 <- phtest(fez2, rez2) #Hausman1 Test reject H0 with a=0.1 so random effects is recommended 
 print(hausman_test2)
 
 stargazer(fez1, rez2, type = "text")
 stargazer(fez1, rez2, type = "text", title = "Table 2: Aggregate Level: Public Sector Employment as Share of Formal Employment & Wage Bill as % of GDP", out = "Table2.html")
+
+################################################################################
+#################################### THIRD MODEL  ##############################
+################################################################################
+
 
 ## Run model by occupational composition  (five levels)
 fez3 <- plm(fpu_em_clerks ~ egov_index +    
@@ -160,9 +243,15 @@ fez3 <- plm(fpu_em_clerks ~ egov_index +
             model= "within")
 
 rez3 <- plm(fpu_em_clerks ~ egov_index +    
-              log(per_growth_gdp) + icrg_qog + upop, 
+              log(gdp_percap) + icrg_qog + upop + time + time_squared, 
             data = zpanel_data, 
             model= "random")
+
+# Obtain clustered standard errors
+cl_se <- vcovHC(rez3, type = "HC3", cluster = "group")
+
+# Display the results with clustered standard errors
+coeftest(rez3, cl_se)
 
 colnames(imp_master_df)
 stargazer(fez3, type = "text")
@@ -180,15 +269,26 @@ hausman_test3 <- phtest(fez3, rez3) #Hausman1 Test reject H0 with a=0.1 so fixed
 print(hausman_test3)
 
 
+################################################################################
+#################################### FOURTH MODEL ##############################
+################################################################################
+
 fez4 <- plm(fpu_em_elem_ocupation ~ egov_index +    
               log(per_growth_gdp) + icrg_qog + upop, 
             data = zpanel_data, 
             model= "within")
 
 rez4 <- plm(fpu_em_elem_ocupation ~ egov_index +    
-              log(per_growth_gdp) + icrg_qog + upop, 
+              log(gdp_percap) + icrg_qog + upop + time + time_squared, 
             data = zpanel_data, 
             model= "random")
+
+# Obtain clustered standard errors
+cl_se <- vcovHC(rez4, type = "HC3", cluster = "group")
+
+# Display the results with clustered standard errors
+coeftest(rez4, cl_se)
+
 
 colnames(imp_master_df)
 stargazer(fez4, type = "text")
@@ -203,6 +303,12 @@ summary(rez4)
 
 hausman_test4 <- phtest(fez4, rez4) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test4)
+
+
+################################################################################
+#################################### FIFTH MODEL  ##############################
+################################################################################
+
 
 fez5  <- plm(fpu_em_professional ~ egov_index +    
                log(per_growth_gdp) + icrg_qog + upop, 
@@ -228,6 +334,12 @@ summary(rez5)
 hausman_test5 <- phtest(fez5, rez5) #Hausman1 Test reject H0 with a=0.1 so fixed effects is recommended 
 print(hausman_test5)
 
+
+################################################################################
+#################################### SIXTH MODEL  ##############################
+################################################################################
+
+
 fez6 <- plm(fpu_em_senior_official ~ egov_index +    
               log(per_growth_gdp) + icrg_qog + upop, 
             data = zpanel_data, 
@@ -251,6 +363,11 @@ summary(rez6)
 
 hausman_test6 <- phtest(fez6, rez6) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test6)
+
+################################################################################
+#################################### SEVENTH MODEL #############################
+################################################################################
+
 
 fez7 <- plm(fpu_em_technician ~ egov_index +    
               log(per_growth_gdp) + icrg_qog + upop, 
@@ -279,6 +396,10 @@ print(hausman_test7)
 stargazer(rez3, rez4, fez5, rez6, rez7, type = "text")
 stargazer(rez3, rez4, fez5, rez6, rez7, type = "text", title = "Table 3: By Occupational Function: WWBI Database Five Levels", out = "Table3.html")
 
+################################################################################
+#################################### EIGHTH MODEL ##############################
+################################################################################
+
 
 ## Run model by educational tier (three levels)
 fez8 <- plm(pri_ed_sppaid_em ~ egov_index +    
@@ -305,6 +426,11 @@ summary(rez8)
 hausman_test8 <- phtest(fez8, rez8) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test8)
 
+################################################################################
+#################################### NINET MODEL ###############################
+################################################################################
+
+
 fez9 <- plm(sec_ed_sppaid_em ~ egov_index +    
               log(per_growth_gdp) +icrg_qog + upop, 
             data = zpanel_data, 
@@ -328,6 +454,10 @@ summary(rez9)
 
 hausman_test9 <- phtest(fez9, rez9) #Hausman1 Test reject H1 with a=0.1 so random effects is recommended
 print(hausman_test9)
+
+################################################################################
+#################################### TENTH MODEL ###############################
+################################################################################
 
 fez10 <- plm(ter_ed_sppaid_em ~ egov_index +    
                log(per_growth_gdp) +icrg_qog + upop, 
